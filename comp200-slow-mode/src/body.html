@@ -1,0 +1,22 @@
+
+<main id="home" class="wrap" aria-label="Season map"></main>
+<section id="lesson" hidden>
+  <header class="topbar">
+    <div class="wrap">
+      <button class="iconbtn" id="backHome" aria-label="Back to all episodes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="tb-title"><b id="tbTitle"></b><small id="tbSub"></small></div>
+      <span class="timer" id="sprint" hidden></span>
+      <button class="iconbtn" id="sprintBtn" aria-pressed="false" aria-label="Start a 10 minute focus sprint" title="10-minute focus sprint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></button>
+      <button class="iconbtn" id="speakBtn" aria-pressed="false" aria-label="Read each card out loud" title="Read aloud"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/></svg></button>
+    </div>
+    <div class="wrap"><div class="segs" id="segs"></div></div>
+  </header>
+  <div class="stage"><div class="wrap" id="stage"></div></div>
+  <nav class="bottombar" aria-label="Step controls">
+    <div class="wrap">
+      <button class="btn" id="prevBtn">Back</button>
+      <span class="stepcount" id="stepCount"></span>
+      <button class="btn primary" id="nextBtn">Next</button>
+    </div>
+  </nav>
+</section>
