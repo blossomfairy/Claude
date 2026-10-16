@@ -1,6 +1,24 @@
 # MOPC Network: "Behind the Scenes" Blooper Reel (all interviews)
 
-One reel built from the raw June 29 interviews. Target length is 54 s plus a 3.5 s end card, which stays under the 60 s Reels limit. The reel is 9:16 at 1080×1920, with captions burned in.
+One reel built from the raw June 29 interviews. It is 9:16 at 1080×1920, with captions burned in.
+
+**Length:** MOPC's `MOPC_Reel_Cut_Plan` says reels are "15s or 30s only, never exceed 30s". The **30 s cut below is the primary deliverable.** The 54 s extended cut is optional. Past MOPC reels ran 55 to 58 s and that conflict was never resolved, so the client decides whether a long cut can run.
+
+## Primary 30 s cut (rows from the full edit list below)
+| Order | Row | Trim | Length |
+|---|---|---|---|
+| 1 | 1 Jeff "love of love" | as listed | 2.3 s |
+| 2 | 3 Sharon "Hi, my name's Shae… I just forgot" | 00:01:04.2 to 00:01:08.2 | 4.0 s |
+| 3 | 4 Sharon "I didn't look at you, did I?" | as listed | 2.0 s |
+| 4 | 5 Jeff "Max, calm down." | as listed | 1.1 s |
+| 5 | 6 Jeff dogs follow him | best 3 s | 3.0 s |
+| 6 | 9 Jeff "That's a life flight." | as listed | 4.9 s |
+| 7 | 10 "one more time" supercut | Jeff 18.6–19.3, Brad 14.5–15.2, Sharon 11:35.3–11:37.3 | 3.4 s |
+| 8 | 12 Jeff clean tagline | as listed | 5.0 s |
+| End | End card | hard cut | 3.5 s |
+| | **Total** | | **29.2 s** |
+
+## Extended cut (about 54 s plus end card, optional)
 
 ## Sources
 | Subject | Raw file (Drive, RAW/Interviews) | Transcript used |
@@ -47,6 +65,7 @@ Slots for Carly, Gary & Lynn and Chris: insert one 2 to 4 s flub per person betw
   - 00:00:38.5 "You little bugger"
   - 00:07:39 to 00:07:47, crew prompting "really, really bad Wi-Fi", which feeds her the line
   - 00:10:12 to 00:10:32 "I haven't experienced this. I don't want to put words in here." This hurts the testimonial's credibility.
+  - Crew lines found in an earlier WhisperX check of Sharon's audio: "No balls." and "Let's get rid of the service". Keep both out of any cut.
 - **Brad (437_2922):**
   - 00:01:38 onward: crew chat about the marketing agency, Halifax restaurants and other businesses
   - Tim Hortons and Boston Pizza are named there, which are third-party brands

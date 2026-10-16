@@ -54,7 +54,7 @@ Each line has a fix that keeps the joke working:
 | 7 | Student Sarah | Upload bar for an assignment at 11:58 pm with a dramatic horror-movie soundtrack | Horror parody (Globe-style) | "Assignment due at midnight. Upload at 99%" |
 | 8 | Small Business Owner Sam | The card machine is "thinking." The customer and Sam make increasingly awkward small talk about the weather | Awkward-silence comedy | "The longest 30 seconds in retail" |
 | 9 | All | Maritime slang explainer: "Rural internet words, translated." Examples: "Some slow" = buffering. "Wicked" = finally loaded | Text-on-screen countdown | "Rural internet, explained in Maritime" |
-| 10 | All, local team | MOPC staff deadpan-read real (approved) customer questions, then answer helpfully. Local, warm, slightly dry | Staff skit, no eye contact | "Things Pictou County asks us" |
+| 10 | All, local team | MOPC staff deadpan-read real (approved) subscriber questions, then answer helpfully. Local, warm, slightly dry | Staff skit, no eye contact | "Things Pictou County asks us" |
 
 Every concept ends on the same beat: relief, then "Two ways to connect. See what's available at your address." Concept 9 can feature FibreFirst and FirstHome Wireless naturally.
 
