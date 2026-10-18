@@ -5,7 +5,7 @@ BPM, TPB = 92, 480
 CHORDS = [(53, [65, 69, 72]), (50, [62, 65, 69]), (46, [62, 65, 70]), (48, [64, 67, 72])]  # bass, triad
 OPTS = {"A_pizz": (45, 45), "B_piano": (0, 0), "C_guitar": (24, 32)}  # (melody prog, bass prog)
 
-END = 42
+END = 38  # beat where the END shot starts
 FINAL = set()
 
 def build(name, prog, bprog):
@@ -20,7 +20,7 @@ def build(name, prog, bprog):
         if b0 >= END and n not in FINAL: return
         ev.append((int(b0 * TPB), mido.Message("note_on", channel=ch, note=n, velocity=v)))
         ev.append((int((b0 + dur) * TPB), mido.Message("note_off", channel=ch, note=n)))
-    bars = 11  # groove until beat 42 (end-card cut), then final chord
+    bars = 10  # groove until END beat (end-card cut), then final chord
     for bar in range(bars):
         bass, tri = CHORDS[bar % 4]
         b = bar * 4
