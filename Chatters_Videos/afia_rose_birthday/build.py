@@ -7,7 +7,7 @@ from build2 import (TEAL, DTEAL, AQUA, INK, GREY, WHITE, F, SS, sprite, balloon_
                     bunting, confetti, background, text_c, logo)
 
 D = sys.path[0] + "/"
-PEOPLE = [("Afia", ["afia1", "afia2"]), ("Rose", ["rose1"])]  # (name, zoom) zooms a close selfie out
+PEOPLE = [("Afia", ["afia1", "afia2"]), ("Rose", ["rose1", "rose3"])]  # (name, zoom) zooms a close selfie out
 
 def studio(w, h):
     """Portrait-studio backdrop: soft light behind the head falling off to a deep teal-grey, fine canvas grain."""

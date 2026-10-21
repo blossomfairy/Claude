@@ -6,6 +6,7 @@ U = "/root/.claude/uploads/254c4376-c66e-58d3-a800-507814c958ac/"
 JOBS = {  # name: (file, crop box as fractions x0, y0, x1, y1)
     "rose1": ("e7eb557f-image.jpg", (0.18, 0.15, 0.78, 0.62)),
     "rose2": ("581f33f2-image.jpg", (0.30, 0.03, 0.68, 0.56)),
+    "rose3": ("47006a52-image.png", (0.19, 0.36, 0.73, 0.69)),  # photo inside the Canva story frame
     "afia1": ("0f213448-image.jpg", (0.08, 0.05, 0.92, 0.62)),
     "afia2": ("75feb142-image.jpg", (0.06, 0.00, 0.94, 0.60)),
     "afia3": ("48d5f0c0-image.jpg", (0.00, 0.03, 1.00, 1.00)),  # full height so shoulders survive the zoom-out
