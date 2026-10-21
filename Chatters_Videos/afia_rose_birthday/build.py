@@ -31,8 +31,8 @@ def portrait(name, w, h, zoom=1.0):
     s = max(w * 1.02 / cut.width, h * 0.82 / cut.height) * zoom
     if zoom < 1:  # zoomed-out selfie: oval soft-edge vignette hides where the photo itself cut the hair and body off
         a = cut.getchannel("A"); fade = Image.new("L", cut.size, 0)
-        ImageDraw.Draw(fade).ellipse((-cut.width * 0.02, -cut.height * 0.1, cut.width * 1.02, cut.height * 0.98), fill=255)
-        fade = fade.filter(ImageFilter.GaussianBlur(cut.width * 0.07))
+        ImageDraw.Draw(fade).ellipse((cut.width * 0.08, -cut.height * 0.1, cut.width * 0.92, cut.height * 0.94), fill=255)
+        fade = fade.filter(ImageFilter.GaussianBlur(cut.width * 0.06))
         cut.putalpha(Image.composite(a, Image.new("L", a.size, 0), fade))
     cut = cut.resize((int(cut.width * s), int(cut.height * s)), Image.LANCZOS)
     img = studio(w, h)
