@@ -1,7 +1,7 @@
 # Afia + Rose birthday post (2026-10-21)
 
 ## Files
-- `CHATTERS_AFIA_ROSE_birthday_reel.mp4`: 16.5 s, 9:16, piano "Happy Birthday" (public-domain melody, own arrangement), -14 LUFS. Each frame cycles that person's photos (Afia 3, Rose 2).
+- `CHATTERS_AFIA_ROSE_birthday_reel.mp4`: 16.5 s, 9:16, piano "Happy Birthday" (public-domain melody, own arrangement), -14 LUFS. Afia cycles 2 photos (studio headshot, salon); Rose uses the restaurant photo.
 - `CHATTERS_AFIA_ROSE_birthday_feed_4x5.jpg`, `CHATTERS_AFIA_ROSE_birthday_story_9x16.jpg`: stills (Afia studio headshot, Rose smiling photo).
 - `cutouts/`: background-removed portraits (local BiRefNet-portrait model via rembg, no third-party service), reusable for future posts.
 - `caption.txt`
