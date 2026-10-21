@@ -24,6 +24,12 @@ FR VO ≈ 40 words, EN VO ≈ 42 words (≈ 1.4 words/s, room for pauses).
 - GPS "Je pars / Get ready now" left out (Premium — coming soon).
 - FR: Québec French, vouvoiement, U+00A0 before « : » and « ! »; the pill « Votre enfant arrive ! » must not wrap.
 
+## Build (kidvy/ad30)
+- `node kidvy/ad30/screens.js` → in-app inserts + end card (mock-ups with the exact live labels; replace with real captures once the owner OKs it).
+- `python3 -I kidvy/ad30/build.py` → `out/kidvy_pickup_30s_{fr,en}_slates.mp4` (30.0 s, grey slates mark each stock slot).
+- With footage: set each beat's clip + in-point in `SHOTS`, then `python3 -I kidvy/ad30/build.py --stock <dir with AdobeStock_*.mov>`.
+- No VO track yet (no voice/TTS in this session); captions carry the script.
+
 ## Hand-off list (blockers before release)
 1. Footage access: Adobe_Stock folder is private (owner femudesign) → set "Anyone with the link: Viewer" so the clips can be downloaded and cut.
 2. CTA kidvy.com/pickup returns 404 (checked 2026-10-21) → must be live before release.
