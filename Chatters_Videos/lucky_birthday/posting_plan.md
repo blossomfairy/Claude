@@ -8,9 +8,12 @@
 
 ## Before posting
 - [ ] Lucky's OK to post publicly, including the words "maternity leave".
-- [ ] Optional: a photo of Lucky (real faces get the most likes and comments; "Chatters mother birthday" 190 views / 18 interactions). Send one and it goes into the post.
+- [ ] Photo of Lucky: send one and run `python build2.py --photo lucky.jpg --reel` (photo goes in the circle, cake becomes a sticker).
 - [ ] Post on the birthday, between 9 am and 6 pm.
 - [ ] Reel to feed + story the same day; tag Lucky if they have a public handle.
 
 ## Timeline row (add to CHATTERS_ALL_IN_ONE.md §1)
 | 10-21 | Lucky birthday (on maternity leave): reel + feed + story | `2026-10\lucky_birthday\` | waiting on Lucky's OK (+ optional photo) |
+
+## Festive version (2026-10-21)
+- `CHATTERS_LUCKY_birthday_festive_reel.mp4`, `_festive_feed_4x5.jpg`, `_festive_story_9x16.jpg`: bunting, balloons, two-tier cake with flickering candles, confetti. Brand teal/aqua; warm yellow only on candle flames and a few confetti pieces.
