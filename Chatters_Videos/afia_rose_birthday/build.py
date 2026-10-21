@@ -7,7 +7,7 @@ from build2 import (TEAL, DTEAL, AQUA, INK, GREY, WHITE, F, SS, sprite, balloon_
                     bunting, confetti, background, text_c, logo)
 
 D = sys.path[0] + "/"
-PEOPLE = [("Afia", ["afia1", "afia2", ("afia3", 0.7)]), ("Rose", ["rose1", "rose2"])]  # (name, zoom) zooms a close selfie out
+PEOPLE = [("Afia", ["afia1", "afia2", ("afia3", 0.5)]), ("Rose", ["rose1", "rose2"])]  # (name, zoom) zooms a close selfie out
 
 def studio(w, h):
     """Portrait-studio backdrop: soft light behind the head falling off to a deep teal-grey, fine canvas grain."""
@@ -29,18 +29,16 @@ def portrait(name, w, h, zoom=1.0):
     """Cutout scaled to fill the frame width, bottom-anchored; whatever runs past the top is clipped by the arch."""
     cut = Image.open(D + f"cut/{name}.png")
     s = max(w * 1.02 / cut.width, h * 0.82 / cut.height) * zoom
-    if zoom < 1:  # zoomed-out photo: soften the edges where the photo itself cut the hair off
-        a = cut.getchannel("A"); ramp = Image.linear_gradient("L").rotate(90).resize((cut.width, 1))
-        edge = int(cut.width * 0.12)
-        fade = Image.new("L", (cut.width, cut.height), 255); fd = ImageDraw.Draw(fade)
-        for x in range(edge):
-            v = int(255 * x / edge); fd.line((x, 0, x, cut.height), fill=v); fd.line((cut.width - 1 - x, 0, cut.width - 1 - x, cut.height), fill=v)
+    if zoom < 1:  # zoomed-out selfie: oval soft-edge vignette hides where the photo itself cut the hair and body off
+        a = cut.getchannel("A"); fade = Image.new("L", cut.size, 0)
+        ImageDraw.Draw(fade).ellipse((cut.width * 0.08, -cut.height * 0.1, cut.width * 0.92, cut.height * 0.94), fill=255)
+        fade = fade.filter(ImageFilter.GaussianBlur(cut.width * 0.06))
         cut.putalpha(Image.composite(a, Image.new("L", a.size, 0), fade))
     cut = cut.resize((int(cut.width * s), int(cut.height * s)), Image.LANCZOS)
     img = studio(w, h)
     shadow = Image.new("RGBA", (w, h)); a = cut.getchannel("A").filter(ImageFilter.GaussianBlur(14))
     sh = Image.new("RGBA", cut.size, (20, 35, 38, 0)); sh.putalpha(a.point(lambda v: int(v * 0.45)))
-    x, y = (w - cut.width) // 2, h - cut.height
+    x, y = (w - cut.width) // 2, (h - cut.height if zoom >= 1 else int(h * 0.12))  # zoomed: head at the same height as the others
     shadow.alpha_composite(sh, (x + 10, y + 6)); img.alpha_composite(shadow); img.alpha_composite(cut, (x, y))
     return img
 
