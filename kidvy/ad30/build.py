@@ -1,86 +1,124 @@
-"""Assemble the 30 s Kidvy Pickup ad (arrival + handover), FR and EN, 1920x1080 25 fps.
+"""Assemble the 30 s Kidvy Pickup AD (arrival + hand-off), FR and EN, 1920x1080 25 fps, with the music bed.
 
-Run: python3 -I kidvy/ad30/build.py [fr|en ...] [--stock DIR]
-- Inserts come from out/screens (run screens.js first).
-- Stock: DIR holds the Adobe_Stock .mov files; each beat's clip + in-point is set in SHOTS.
-  A beat without a clip on disk renders a labelled slate, so timing can be reviewed before footage arrives.
-- Captions and inserts stay inside the centred 9:16 column (608 px) for the vertical cut.
+Run: python3 -I kidvy/ad30/build.py [fr|en ...] [--stock DIR] [--music A|B|C]
+- Inputs: out/screens (node screens.js), out/music/option_X.wav (python3 compose.py), stock proxies in DIR
+  (1080p H.264 made from Drive › Adobe_Stock, named AdobeStock_<id>.mp4).
+- Grid: 100 BPM, 1 bar = 2.4 s = 60 frames; every cut sits on a bar line, the lift is on the hand-off (16.8 s).
+- Rules (kidvy-pickup-ad): hook = people, no app; UI only as pills over footage (≤ 30 % of frames);
+  shots 2.4-4.8 s; end card ≤ 4 s; -14 LUFS, limiter ceiling -2.0 dBFS so AAC stays ≤ -1 dBTP.
 """
 import os, subprocess, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCR = os.path.join(HERE, "out", "screens")
+MUS = os.path.join(HERE, "out", "music")
 FONT = "/usr/share/fonts/opentype/inter/Inter-Bold.otf"
 NB = " "
+BAR = 2.4
+GRADE = "eq=contrast=1.04:brightness=0.015:saturation=1.06:gamma=1.02,colorbalance=rm=0.025:bm=-0.02"
 
-# (duration s, stock clip or None, in-point s, slate note, [(insert, start s, end s)], caption fr, caption en)
+# (bars, clip id, in-point s, [(pill, x, y, start s, end s)], caption key) — times inside the shot
 SHOTS = [
-    (4, None, 0, "parents waiting outside a school, end of day", [],
-     f"15 h 30.\nLa file au portail.", "3:30.\nThe line at the gate."),
-    (5, None, 0, "parent arriving, phone in hand", [("parent_here", 0, 2.5), ("parent_notified", 2.5, 5)],
-     f"Le parent arrive{NB}:\n«{NB}Je suis là{NB}».", "The parent arrives:\n“I’m here.”"),
-    (5, None, 0, "teacher with a class tablet", [("class_waiting", 0, 2.5), ("class_onway", 2.5, 5)],
-     "La classe le voit\nà l’écran.", "The class sees it\non screen."),
-    (6, None, 0, "staff at the entrance holding a tablet", [("gate_scan", 0, 6)],
-     "Au portail, on scanne\nle code du parent.", "At the gate, the parent’s\ncode is scanned."),
-    (5, None, 0, "child walks out to the parent (wide / from behind)", [("gate_handed", 0, 5)],
-     "L’enfant est remis.\nChaque enfant remis est noté.", "The child is handed over.\nEach hand-off is on record."),
-    (5, "ENDCARD", 0, "", [], "", ""),
+    (1, "624086363", 2.0, [], "c1"),
+    (1, "424171310", 2.0, [], "c2"),
+    (1, "624086363", 9.5, [], "c2"),
+    (1, "283680613", 1.0, [("pill_here", 1180, 380, 0.25, 1.35), ("pill_notified", "W-w-140", 250, 1.35, 2.4)], "c3"),
+    (1, "1831479379", 1.0, [], "c4"),
+    (1, "2115633640", 3.0, [], "c4"),
+    (2, "678770640", 0.0, [("pill_handed", "W-w-140", 140, 2.5, 4.8)], "c5"),
+    (1, "573153209", 3.5, [], "c6"),
+    (2, "753350890", 2.5, [], "c6"),
 ]
+END_S = 30.0 - BAR * sum(s[0] for s in SHOTS)  # 3.6 s
+
+# captions: (start s, end s, text) on the timeline; each line sized for ≤ 155 wpm
+CAPS = {
+    "fr": [(0.2, 2.3, "La file au portail."), (2.6, 7.1, "Le walkie-talkie. L’attente."),
+           (7.4, 9.5, f"Juste «{NB}Je suis là{NB}»."), (9.8, 14.3, "La classe le voit à l’écran.\nL’enfant se prépare."),
+           (14.6, 19.1, "L’enfant est remis."), (19.4, 26.2, "Chaque enfant remis est noté.\nL’esprit tranquille.")],
+    "en": [(0.2, 2.3, "The line at the gate."), (2.6, 7.1, "The walkie-talkie. The wait."),
+           (7.4, 9.5, "Just “I’m here.”"), (9.8, 14.3, "The class sees it on screen.\nThe child gets ready."),
+           (14.6, 19.1, "The child is handed over."), (19.4, 26.2, "Each hand-off is on record.\nPeace of mind.")],
+}
 
 
 def run(cmd):
-    r = subprocess.run(cmd, capture_output=True, text=True)
+    r = subprocess.run(["ffmpeg", "-nostdin", "-loglevel", "error", "-y", *cmd], capture_output=True, text=True)
     if r.returncode:
-        sys.exit("ffmpeg failed:\n" + r.stderr[-1500:])
+        sys.exit("ffmpeg failed:\n" + r.stderr[-2000:])
 
 
-def seg(lang, i, shot, stock_dir, tmp):
-    dur, clip, inpt, note, inserts, cap_fr, cap_en = shot
+def shot(lang, i, s, stock, tmp):
+    bars, clip, inpt, pills, _ = s
+    dur = bars * BAR
     out = os.path.join(tmp, f"{i:02d}.mp4")
-    if clip == "ENDCARD":
-        run(["ffmpeg", "-y", "-loop", "1", "-t", str(dur), "-i", os.path.join(SCR, f"{lang}_endcard.png"),
-             "-vf", "fps=25,format=yuv420p,fade=in:0:10", "-c:v", "libx264", "-crf", "18", out])
-        return out
-    path = clip and os.path.join(stock_dir or "", clip)
-    if path and os.path.exists(path):
-        src = ["-ss", str(inpt), "-t", str(dur), "-i", path]
-        base = "[0:v]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=25,setsar=1[bg]"
-    else:  # slate until footage is available
-        notefile = os.path.join(tmp, f"note{i}.txt")
-        open(notefile, "w", encoding="utf-8").write(f"STOCK — {note}")
-        src = ["-f", "lavfi", "-t", str(dur), "-i", "color=c=0x2b3440:s=1920x1080:r=25"]
-        base = (f"[0:v]drawtext=fontfile={FONT}:textfile={notefile}:fontcolor=0x9aa5b1:fontsize=30:"
-                f"x=(w-tw)/2:y=60,setsar=1[bg]")
-    chain, last, n = [base], "bg", 1
-    for name, a, b in inserts:
-        src += ["-i", os.path.join(SCR, f"{lang}_{name}.png")]
-        h = 560 if name.startswith("parent") else 330  # phone vs tablet strip, both < 608 px wide
-        chain.append(f"[{n}:v]scale=-1:{h},scale='min(iw,560)':-1[i{n}]")
-        chain.append(f"[{last}][i{n}]overlay=x=(W-w)/2:y=150:enable='between(t,{a},{b})'[v{n}]")
-        last, n = f"v{n}", n + 1
-    capfile = os.path.join(tmp, f"cap{i}.txt")
-    open(capfile, "w", encoding="utf-8").write(cap_fr if lang == "fr" else cap_en)
-    chain.append(f"[{last}]drawtext=fontfile={FONT}:textfile={capfile}:fontcolor=white:fontsize=40:"
-                 f"line_spacing=10:box=1:boxcolor=black@0.55:boxborderw=18:x=(w-tw)/2:y=h-th-110,format=yuv420p[out]")
-    run(["ffmpeg", "-y", *src, "-filter_complex", ";".join(chain), "-map", "[out]",
-         "-t", str(dur), "-c:v", "libx264", "-crf", "18", out])
+    src = ["-ss", str(inpt), "-t", str(dur), "-i", os.path.join(stock, f"AdobeStock_{clip}.mp4")]
+    chain = [f"[0:v]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=25,setsar=1,{GRADE},format=yuv420p[v0]"]
+    last = "v0"
+    for n, (name, x, y, a, b) in enumerate(pills, 1):
+        src += ["-loop", "1", "-t", str(dur), "-i", os.path.join(SCR, f"{lang}_{name}.png")]
+        # 0.3 s fade + 18 px rise in, 0.2 s fade out; RGBA overlay converted with bt709 to keep #F9413B true
+        chain.append(f"[{n}:v]format=rgba,fade=t=in:st={a}:d=0.3:alpha=1,fade=t=out:st={b - 0.2}:d=0.2:alpha=1[p{n}]")
+        chain.append(f"[{last}][p{n}]overlay=x={x}:y='{y}+18*max(0,1-(t-{a})/0.3)':enable='between(t,{a},{b})'"
+                     f":format=yuv420[o{n}]")
+        last = f"o{n}"
+    run([*src, "-filter_complex", ";".join(chain), "-map", f"[{last}]", "-t", str(dur),
+         "-c:v", "libx264", "-crf", "16", "-preset", "fast", "-colorspace", "bt709", "-color_primaries", "bt709",
+         "-color_trc", "bt709", out])
     return out
 
 
-def build(lang, stock_dir):
+def endcard(lang, tmp):
+    out = os.path.join(tmp, "end.mp4")
+    # continuous slow push (no freeze), fade in from the last shot
+    run(["-loop", "1", "-t", str(END_S), "-i", os.path.join(SCR, f"{lang}_endcard.png"), "-vf",
+         f"fps=25,scale=w='trunc(1920*(1+0.05*t/{END_S})/2)*2':h=-2:eval=frame,crop=1920:1080,setsar=1,"
+         "fade=in:0:8,format=yuv420p", "-c:v", "libx264", "-crf", "16", out])
+    return out
+
+
+def captions(lang, src, dst, tmp):
+    filt = []
+    for k, (a, b, txt) in enumerate(CAPS[lang]):
+        f = os.path.join(tmp, f"cap_{lang}_{k}.txt")
+        open(f, "w", encoding="utf-8").write(txt)
+        filt.append(f"drawtext=fontfile={FONT}:textfile={f}:fontcolor=white:fontsize=46:line_spacing=12:"
+                    f"box=1:boxcolor=black@0.45:boxborderw=20:x=(w-tw)/2:y=h-th-96:enable='between(t,{a},{b})'")
+    run(["-i", src, "-vf", ",".join(filt), "-c:v", "libx264", "-crf", "16", "-preset", "medium", dst])
+
+
+def mix(music, tmp):
+    """Bed only (no VO yet): gentle compression keeps LRA ≤ 6 LU, linear gain to -14 LUFS, limiter -2.0 dBFS."""
+    pre = os.path.join(tmp, "pre.wav")
+    run(["-i", music, "-af", "acompressor=threshold=-32dB:ratio=3:attack=30:release=600:makeup=5dB", pre])
+    r = subprocess.run(["ffmpeg", "-nostdin", "-hide_banner", "-i", pre, "-af", "ebur128", "-f", "null", "-"],
+                       capture_output=True, text=True).stderr
+    i_lufs = float([l for l in r.splitlines() if l.strip().startswith("I:")][-1].split()[1])
+    out = os.path.join(tmp, "mix.wav")
+    run(["-i", pre, "-af", f"volume={-14.0 - i_lufs:.2f}dB,alimiter=limit=-2.0dB:level=false:latency=1",
+         "-ar", "48000", out])
+    return out
+
+
+def build(lang, stock, opt):
     with tempfile.TemporaryDirectory() as tmp:
-        parts = [seg(lang, i, s, stock_dir, tmp) for i, s in enumerate(SHOTS)]
+        parts = [shot(lang, i, s, stock, tmp) for i, s in enumerate(SHOTS)] + [endcard(lang, tmp)]
         lst = os.path.join(tmp, "list.txt")
         open(lst, "w").write("".join(f"file '{p}'\n" for p in parts))
-        dst = os.path.join(HERE, "out", f"kidvy_pickup_30s_{lang}{'' if stock_dir else '_slates'}.mp4")
-        run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", "-movflags", "+faststart", dst])
+        pic = os.path.join(tmp, "pic.mp4")
+        run(["-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", pic])
+        capd = os.path.join(tmp, "cap.mp4")
+        captions(lang, pic, capd, tmp)
+        audio = mix(os.path.join(MUS, f"option_{opt}.wav"), tmp)
+        dst = os.path.join(HERE, "out", f"kidvy_pickup_ad30_{lang}_music{opt}.mp4")
+        run(["-i", capd, "-i", audio, "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "320k",
+             "-t", "30", "-movflags", "+faststart", dst])
         return dst
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    stock = args[args.index("--stock") + 1] if "--stock" in args else None
-    langs = [a for a in args if a in ("fr", "en")] or ["fr", "en"]
-    for lang in langs:
-        print(build(lang, stock))
+    a = sys.argv[1:]
+    stock = a[a.index("--stock") + 1] if "--stock" in a else os.path.join(HERE, "stock")
+    opt = a[a.index("--music") + 1] if "--music" in a else "A"
+    for lang in [x for x in a if x in ("fr", "en")] or ["fr", "en"]:
+        print(build(lang, stock, opt))

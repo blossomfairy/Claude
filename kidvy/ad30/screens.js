@@ -58,6 +58,16 @@ const endcard = t => `<div style="width:1920px;height:1080px;background:#fff;dis
     }
     const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
     await p.setContent(`<style>${CSS}</style>${endcard(t)}`); await p.screenshot({ path: `${OUT}/${lang}_endcard.png` }); await p.close();
+    // pills over footage: exact app strings, plain red bar, no glyph/logo (claims review: no push-notification look)
+    for (const [k, txt, red] of [['pill_here', t.here, true], ['pill_notified', t.notified, false], ['pill_handed', t.handed, false]]) {
+      const q = await b.newPage({ viewport: { width: 900, height: 200 }, deviceScaleFactor: 1 });
+      const card = red
+        ? `<div id="c" style="display:inline-block;background:#F9413B;color:#fff;font:700 44px Inter;border-radius:18px;padding:26px 54px;white-space:nowrap">${txt}</div>`
+        : `<div id="c" style="display:inline-flex;align-items:stretch;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.18);white-space:nowrap">
+             <div style="width:14px;background:#F9413B"></div><div style="font:600 36px Inter;color:#1f2937;padding:26px 36px">${txt}</div></div>`;
+      await q.setContent(`<body style="margin:0;background:transparent;padding:24px">${card}</body>`);
+      await (await q.$('#c')).screenshot({ path: `${OUT}/${lang}_${k}.png`, omitBackground: true }); await q.close();
+    }
   }
   await b.close(); console.log('ok', fs.readdirSync(OUT).length, 'files');
 })();

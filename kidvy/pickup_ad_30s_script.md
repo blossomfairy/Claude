@@ -1,37 +1,49 @@
-# Kidvy Pickup — 30 s ad: arrival + handover (v1 draft)
+# Kidvy Pickup — 30 s ad: arrival + hand-off (v2, rough cut)
 
-Sources: kidvy-pickup SKILL.md (Drive) and live demo labels (demo.kidvy.app/pickup, 87 keys, 2026-10-21).
-Footage: Drive › Adobe_Stock (15 Adobe Stock clips) — not yet reviewed (not downloadable; see the hand-off list below).
-Framing: "check-in" = parent taps « Je suis là » / "I'm here"; "check-out" = gate taps « Remis au parent » / "Handed over".
+Rules: kidvy-pickup + kidvy-pickup-ad (12 criteria) + kidvy-music-director (Drive skills, read 2026-10-21).
+Footage: Drive › Adobe_Stock (15 Adobe Stock clips, licensed by the owner). Framing: "check-in" = « Je suis là » / "I’m here"; "check-out" = « Remis au parent » / "Handed over". Pills over footage, never a step-by-step walk-through.
 
-| Time | Picture (stock + in-app screen) | VO / on-screen FR | VO / on-screen EN |
-|---|---|---|---|
-| 0–4 s | Stock: parents gathering outside a school at the end of the day (no signage, no plates) | 15 h 30. La file au portail. | 3:30. The line at the gate. |
-| 4–9 s | Stock: parent arriving, holding a phone. Insert phone screen: red « Je suis là » button, then the pill « L’école est avisée. Merci de patienter. » | Le parent arrive : « Je suis là ». | The parent arrives: "I’m here." |
-| 9–14 s | Stock: teacher with a class tablet. Insert class screen: « En attente » (amber) → « En route » (blue) | La classe le voit à l’écran. | The class sees it on screen. |
-| 14–20 s | Stock: staff member at the entrance holding a tablet. Insert gate screen: « Scanner un code » → code « Code (ex. AB3K-12) » | Au portail, on scanne le code du parent. | At the gate, the parent’s code is scanned. |
-| 20–25 s | Stock: child walking out to the parent (actors, filmed from behind or wide). Insert « Remis au parent » → green « Remis » pill | L’enfant est remis. Chaque enfant remis est noté. | The child is handed over. Each hand-off is on record. |
-| 25–30 s | End card: Kidvy logo + tagline + CTA | Le ramassage, plus simple et plus calme. Demandez une démo : kidvy.com/pickup | Pickup, simpler and calmer. Request a demo: kidvy.com/pickup |
+## Locked cut (100 BPM grid: 1 bar = 2.4 s = 60 frames at 25 fps; every cut on a bar line)
+| s | Adobe Stock clip @ in-point | Picture | Pill (exact app string) | Caption FR / EN |
+|---|---|---|---|---|
+| 0.0–2.4 | 624086363 @ 2.0 | impatient line of parents | — | La file au portail. / The line at the gate. |
+| 2.4–4.8 | 424171310 @ 2.0 | walkie-talkie close-up | — | Le walkie-talkie. L’attente. / The walkie-talkie. The wait. |
+| 4.8–7.2 | 624086363 @ 9.5 | a waiting face | — | (same) |
+| 7.2–9.6 | 283680613 @ 1.0 | phone in a parent’s hand | « Je suis là » → « L’école est avisée. Merci de patienter. » | Juste « Je suis là ». / Just “I’m here.” |
+| 9.6–12.0 | 1831479379 @ 1.0 | teacher looks at a tablet | — | La classe le voit à l’écran. L’enfant se prépare. / The class sees it on screen. The child gets ready. |
+| 12.0–14.4 | 2115633640 @ 3.0 | teacher helps a child with her backpack | — | (same) |
+| 14.4–19.2 | 678770640 @ 0.0 | girl runs to her dad, hug — **music lift at 16.8** | « Remis au parent » / "Handed over" | L’enfant est remis. / The child is handed over. |
+| 19.2–21.6 | 573153209 @ 3.5 | hands join | — | Chaque enfant remis est noté. L’esprit tranquille. / Each hand-off is on record. Peace of mind. |
+| 21.6–26.4 | 753350890 @ 2.5 | same girl + dad walk off hand in hand | — | (same) |
+| 26.4–30.0 | end card | logo + tagline + CTA | — | Le ramassage, plus simple et plus calme. Demandez une démo : kidvy.com/pickup / Pickup, simpler and calmer. Request a demo: kidvy.com/pickup |
 
-FR VO ≈ 40 words, EN VO ≈ 42 words (≈ 1.4 words/s, room for pauses).
+## Music — 3 original options (you pick; nothing approved yet)
+Composed to the locked cut (`compose.py`, own composition rendered with the FluidR3 GM soundfont, MIT licence). Same form for all: soft open (0–7.2), rhythm enters on « Je suis là » (7.2), one lift on the hand-off (16.8), resolve on the end card (26.4).
+- **A** felt piano + nylon guitar, D major (default) · **B** piano + pizzicato strings, G major · **C** felt piano + soft shaker + warm pad, C major.
+- Hits measured vs the cut: 7.2 / 16.8 / 26.4 s within −54…+29 ms (limit 2 frames = 80 ms).
 
-## Rules applied (brief §9 + claims rulings)
-- Pickup only; no attendance, messaging, payments; the words "check-in/check-out" are not used.
-- No price, no "free/gratuit", no competitor, no law/compliance claims, no "instant/real-time", no push/SMS look (pills shown in-app, no bell, never in the lock-screen banner position).
-- Tagline uses the "simpler" swap ("faster" is on HOLD for paid).
-- No real school/CSS names or logos, no plates; stock people only as actors, no lip-sync, no first-person lines over stock faces.
-- Class screen shown on a teacher phone or class tablet; gate screen on a tablet (no desktop monitors).
-- GPS "Je pars / Get ready now" left out (Premium — coming soon).
-- FR: Québec French, vouvoiement, U+00A0 before « : » and « ! »; the pill « Votre enfant arrive ! » must not wrap.
+## QC (all 6 renders, 2026-10-21)
+| Criterion | Rule | Measured |
+|---|---|---|
+| Duration | 30 s | 30.000 s |
+| Hook | people, no app, ≤ 3 s | 0–2.4 s line of parents, no UI |
+| UI share | ≤ 30 % of frames | ≈ 4.4 s / 30 s ≈ 15 %; longest UI run ≈ 2.2 s |
+| UI form | ≥ 70 % pill/phone-in-hand | 100 % pills over footage |
+| Shots | mean 2.4–3.1 s, none > 5 s | 9 shots / 26.4 s = 2.93 s mean, longest 4.8 s; scene detector cuts = 2.4, 4.8 … 26.4 exactly |
+| End card | ≤ 4 s, logo + one action | 3.6 s, slow push, freezedetect (n=0.003, d=2): 0 freezes |
+| Captions | ≤ 155 wpm | max 143 wpm (EN C1) |
+| Loudness | −14 LUFS, ≤ −1 dBTP, LRA ≤ 6 | −14.0 LUFS, −2.0…−1.8 dBTP, LRA 4.4 LU (AAC 320k) |
+| Claims | brief §9 | emulated claims-lint grep: no hits (real `claims_lint.py` not in this session) |
 
-## Build (kidvy/ad30)
-- `node kidvy/ad30/screens.js` → in-app inserts + end card (mock-ups with the exact live labels; replace with real captures once the owner OKs it).
-- `python3 -I kidvy/ad30/build.py` → `out/kidvy_pickup_30s_{fr,en}_slates.mp4` (30.0 s, grey slates mark each stock slot).
-- With footage: set each beat's clip + in-point in `SHOTS`, then `python3 -I kidvy/ad30/build.py --stock <dir with AdobeStock_*.mov>`.
-- No VO track yet (no voice/TTS in this session); captions carry the script.
+## Build
+1. Proxies: Adobe_Stock clips → 1080p 25 fps H.264 (`AdobeStock_<id>.mp4`) in one folder.
+2. `node kidvy/ad30/screens.js` (pills, end card) → `python3 -I kidvy/ad30/compose.py` (music) → `python3 -I kidvy/ad30/build.py fr en --stock <proxies> --music A|B|C`.
 
-## Hand-off list (blockers before release)
-1. Footage access: Adobe_Stock folder is private (owner femudesign) → set "Anyone with the link: Viewer" so the clips can be downloaded and cut.
-2. CTA kidvy.com/pickup returns 404 (checked 2026-10-21) → must be live before release.
-3. App screens: real demo captures need owner OK (the capture script changes demo state).
-4. Counsel review for "Each hand-off is on record" before paid ads.
+## Open items (hand-off list)
+1. Pick music A, B or C.
+2. CTA kidvy.com/pickup still returns 404 (checked 2026-10-21) → must be live before release.
+3. No VO: no recording from the client’s paid voice talent yet → captions carry the words (no temporary text-to-speech, per kidvy-pickup-ad).
+4. Casting: the parents in the queue (624086363) and the classroom teacher/child (1831479379, 2115633640) are different people from the hero dad and girl. Acceptable as "other families / staff"; the owner should confirm. Kids appear as licensed stock actors (owner still to confirm, brief §9).
+5. Counsel check before paid ads: « Chaque enfant remis est noté » / "Each hand-off is on record".
+6. Only 16:9 delivered; 9:16 and 1:1 need native reframes.
+7. Final masters not uploaded to Drive (the connector can't carry 31 MB files); copy from the session or the repo outputs.
