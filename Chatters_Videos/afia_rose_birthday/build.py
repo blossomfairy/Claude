@@ -7,7 +7,7 @@ from build2 import (TEAL, DTEAL, AQUA, INK, GREY, WHITE, F, SS, sprite, balloon_
                     bunting, confetti, background, text_c, logo)
 
 D = sys.path[0] + "/"
-PEOPLE = [("Afia", ["afia1", "afia2", "afia3"]), ("Rose", ["rose1", "rose2"])]
+PEOPLE = [("Afia", ["afia1", "afia2", ("afia3", 0.7)]), ("Rose", ["rose1", "rose2"])]  # (name, zoom) zooms a close selfie out
 
 def studio(w, h):
     """Portrait-studio backdrop: soft light behind the head falling off to a deep teal-grey, fine canvas grain."""
@@ -25,10 +25,17 @@ def arch_mask(w, h):
     d.rectangle((0, h * SS // 2, w * SS, h * SS), fill=255)
     return m.resize((w, h), Image.LANCZOS)
 
-def portrait(name, w, h):
+def portrait(name, w, h, zoom=1.0):
     """Cutout scaled to fill the frame width, bottom-anchored; whatever runs past the top is clipped by the arch."""
     cut = Image.open(D + f"cut/{name}.png")
-    s = max(w * 1.02 / cut.width, h * 0.82 / cut.height)
+    s = max(w * 1.02 / cut.width, h * 0.82 / cut.height) * zoom
+    if zoom < 1:  # zoomed-out photo: soften the edges where the photo itself cut the hair off
+        a = cut.getchannel("A"); ramp = Image.linear_gradient("L").rotate(90).resize((cut.width, 1))
+        edge = int(cut.width * 0.12)
+        fade = Image.new("L", (cut.width, cut.height), 255); fd = ImageDraw.Draw(fade)
+        for x in range(edge):
+            v = int(255 * x / edge); fd.line((x, 0, x, cut.height), fill=v); fd.line((cut.width - 1 - x, 0, cut.width - 1 - x, cut.height), fill=v)
+        cut.putalpha(Image.composite(a, Image.new("L", a.size, 0), fade))
     cut = cut.resize((int(cut.width * s), int(cut.height * s)), Image.LANCZOS)
     img = studio(w, h)
     shadow = Image.new("RGBA", (w, h)); a = cut.getchannel("A").filter(ImageFilter.GaussianBlur(14))
@@ -44,7 +51,7 @@ class Card:
                   dict(bunt=30, script=110, name=200, fw=400, fh=540, fy=410, label=965, msg=1040, sign=1105, logo=1215))
         L = self.L; self.gap = 50
         self.mask = arch_mask(L["fw"], L["fh"])
-        self.frames = [[portrait(n, L["fw"], L["fh"]) for n in names] for _, names in PEOPLE]
+        self.frames = [[portrait(*((n, L["fw"], L["fh"]) if isinstance(n, str) else (n[0], L["fw"], L["fh"], n[1]))) for n in names] for _, names in PEOPLE]
         ring = L["fw"] + 24
         self.border = sprite(ring, L["fh"] + 24, lambda d, s: d.rounded_rectangle(
             (0, 0, ring * s, (L["fh"] + 24) * s), radius=ring * s // 2, fill=TEAL))

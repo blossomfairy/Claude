@@ -8,7 +8,7 @@ JOBS = {  # name: (file, crop box as fractions x0, y0, x1, y1)
     "rose2": ("581f33f2-image.jpg", (0.30, 0.03, 0.68, 0.56)),
     "afia1": ("0f213448-image.jpg", (0.08, 0.05, 0.92, 0.62)),
     "afia2": ("75feb142-image.jpg", (0.06, 0.00, 0.94, 0.60)),
-    "afia3": ("48d5f0c0-image.jpg", (0.00, 0.05, 1.00, 0.70)),
+    "afia3": ("48d5f0c0-image.jpg", (0.00, 0.03, 1.00, 1.00)),  # full height so shoulders survive the zoom-out
 }
 sess = new_session(sys.argv[1] if len(sys.argv) > 1 else "birefnet-portrait")
 import os
