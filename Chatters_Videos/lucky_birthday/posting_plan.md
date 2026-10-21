@@ -8,7 +8,7 @@
 
 ## Before posting
 - [ ] Lucky's OK to post publicly, including the words "maternity leave".
-- [ ] Photo of Lucky: send one and run `python build2.py --photo lucky.jpg --reel` (photo goes in the circle, cake becomes a sticker).
+- [x] Photos of Lucky added 2026-10-21 (4 photos: stills use the salon photo, the reel cycles all 4). Confirm Lucky is happy with these photos being public.
 - [ ] Post on the birthday, between 9 am and 6 pm.
 - [ ] Reel to feed + story the same day; tag Lucky if they have a public handle.
 

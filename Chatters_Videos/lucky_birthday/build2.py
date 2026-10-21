@@ -1,5 +1,6 @@
 """Festive Lucky birthday post: bunting, balloons, cake with flickering candles, round photo slot.
-usage: python build2.py [--photo lucky.jpg] [--reel]   (no photo -> the cake fills the circle)"""
+usage: python build2.py [--photo a.jpg:fx:fy ...] [--reel]   (fx, fy = face centre as 0-1 fractions;
+no photo -> the cake fills the circle; several photos -> stills use the first, the reel cycles through them)"""
 import argparse, math, random, subprocess, sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
@@ -85,14 +86,17 @@ def text_c(img, s, font, y, fill, a=1.0, shadow=False):
         img.alpha_composite(sh.filter(ImageFilter.GaussianBlur(5)))
     d.text((x, y), s, font=font, fill=fill + (int(255 * a),)); img.alpha_composite(lay)
 
-def photo_circle(photo, dia):
-    p = ImageOps.fit(photo.convert("RGB"), (dia, dia), Image.LANCZOS, centering=(0.5, 0.4))
+def photo_circle(photo, dia, fx=0.5, fy=0.4):
+    """Square crop around the face (face sits slightly above centre), masked to a circle."""
+    im = photo.convert("RGB"); side = min(im.width, im.height) * 0.8
+    x0 = min(max(fx * im.width - side / 2, 0), im.width - side); y0 = min(max(fy * im.height - side * 0.42, 0), im.height - side)
+    p = im.crop((int(x0), int(y0), int(x0 + side), int(y0 + side))).resize((dia, dia), Image.LANCZOS)
     m = Image.new("L", (dia * SS, dia * SS)); ImageDraw.Draw(m).ellipse((0, 0, dia * SS, dia * SS), fill=255)
     out = Image.new("RGBA", (dia, dia)); out.paste(p, (0, 0), m.resize((dia, dia), Image.LANCZOS)); return out
 
 class Card:
-    def __init__(self, w, h, photo=None):
-        self.w, self.h, self.photo = w, h, photo
+    def __init__(self, w, h, photos=()):
+        self.w, self.h = w, h; photo = bool(photos)
         tall = h > 1500; k = 1.0 if tall else 0.75; self.k = k
         self.L = (dict(bunt=110, script=290, name=390, cy=940, dia=500, msg=1240, sign=1415, logo=1590) if tall else
                   dict(bunt=30, script=120, name=215, cy=655, dia=405, msg=905, sign=1065, logo=1195))
@@ -100,7 +104,7 @@ class Card:
         self.ring = sprite(self.L["dia"] + 40, self.L["dia"] + 40, lambda d, s: (
             d.ellipse((0, 0, (self.L["dia"] + 40) * s, (self.L["dia"] + 40) * s), fill=TEAL),
             d.ellipse((10 * s, 10 * s, (self.L["dia"] + 30) * s, (self.L["dia"] + 30) * s), fill=WHITE)))
-        self.inner = photo_circle(photo, self.L["dia"]) if photo else None
+        self.inner = [photo_circle(im, self.L["dia"], fx, fy) for im, fx, fy in photos]
         cw = int((300 if photo else self.L["dia"] * 0.78) * k) if photo else int(self.L["dia"] * 0.78)
         self.cake, self.cake_h = cake_sprite(cw); self.cw = cw
         self.flame = flame_sprite(max(14, int(cw * 0.07)))
@@ -127,7 +131,11 @@ class Card:
             img.alpha_composite(spr, (int(fx * w - spr.width / 2), int(fy * h - spr.height / 2 + 14 * math.sin(tt * 1.1 + ph))))
         r = self.ring; img.alpha_composite(r, ((w - r.width) // 2, L["cy"] - r.height // 2))
         if self.inner:
-            img.alpha_composite(self.inner, ((w - L["dia"]) // 2, L["cy"] - L["dia"] // 2))
+            hold, xf = 3.6, 0.5                                                                   # reel: cycle photos
+            i = int(tt // hold) % len(self.inner); ph = self.inner[i]
+            if t is not None and len(self.inner) > 1 and tt % hold > hold - xf:
+                ph = Image.blend(ph, self.inner[(i + 1) % len(self.inner)], (tt % hold - (hold - xf)) / xf)
+            img.alpha_composite(ph, ((w - L["dia"]) // 2, L["cy"] - L["dia"] // 2))
             cx, cy = w // 2 + int(L["dia"] * 0.36), L["cy"] + int(L["dia"] * 0.28)               # cake "sticker"
         else:
             cx, cy = w // 2, L["cy"] - self.cake_h // 2 + int(L["dia"] * 0.08)
@@ -148,8 +156,8 @@ class Card:
         return img.convert("RGB")
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("--photo"); ap.add_argument("--reel", action="store_true"); a = ap.parse_args()
-    photo = Image.open(a.photo) if a.photo else None
+    ap = argparse.ArgumentParser(); ap.add_argument("--photo", nargs="*", default=[]); ap.add_argument("--reel", action="store_true"); a = ap.parse_args()
+    photo = [(Image.open(p.rsplit(":", 2)[0]), float(p.rsplit(":", 2)[1]), float(p.rsplit(":", 2)[2])) for p in a.photo]
     tag = "_photo" if photo else ""
     Card(1080, 1350, photo).render().save(D + f"CHATTERS_LUCKY_birthday_festive{tag}_feed_4x5.jpg", quality=95)
     story = Card(1080, 1920, photo); story.render().save(D + f"CHATTERS_LUCKY_birthday_festive{tag}_story_9x16.jpg", quality=95)
