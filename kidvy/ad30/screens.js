@@ -3,6 +3,8 @@
 const { chromium } = require(process.env.PW || '/opt/node22/lib/node_modules/playwright');
 const path = require('path'), fs = require('fs');
 const OUT = path.join(__dirname, 'out', 'screens'); fs.mkdirSync(OUT, { recursive: true });
+// official logo: Drive › kidvy-brand › assets › logo_colour.svg
+const LOGO = fs.readFileSync(path.join(__dirname, 'brand', 'kidvy_logo_colour.svg')).toString('base64');
 
 const T = {
   fr: { school: 'École Démo Gatineau', mine: 'Mes enfants', here: 'Je suis là', notified: 'L’école est avisée. Merci de patienter.',
@@ -44,7 +46,7 @@ const screens = {
 };
 const SIZE = { parent: [390, 844], class: [834, 600], gate: [834, 600] };
 const endcard = t => `<div style="width:1920px;height:1080px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px">
-  <div style="color:#F9413B;font-weight:800;font-size:150px;letter-spacing:-4px">kidvy</div>
+  <img src="data:image/svg+xml;base64,${LOGO}" style="height:230px">
   <div style="font-weight:700;font-size:64px;color:#1f2937">${t.tag}</div><div style="font-size:42px;color:#4b5563">${t.cta}</div></div>`;
 
 (async () => {

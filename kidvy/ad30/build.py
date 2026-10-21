@@ -15,6 +15,9 @@ MUS = os.path.join(HERE, "out", "music")
 FONT = "/usr/share/fonts/opentype/inter/Inter-Bold.otf"
 NB = " "
 BAR = 2.4
+# Music: Adobe Stock 487400182 "Folk Acoustic Light" (licensed 2026-10-21), 100 BPM, beats on 0.6 s from 0.0.
+# Played from 108.0 s so its final chord (134.4 s, a downbeat) lands on the end card at 26.4 s.
+MUSIC_IN = 108.0
 GRADE = "eq=contrast=1.04:brightness=0.015:saturation=1.06:gamma=1.02,colorbalance=rm=0.025:bm=-0.02"
 
 # (bars, clip id, in-point s, [(pill, x, y, start s, end s)], caption key) — times inside the shot
@@ -32,13 +35,13 @@ SHOTS = [
 END_S = 30.0 - BAR * sum(s[0] for s in SHOTS)  # 3.6 s
 
 # captions: (start s, end s, text) on the timeline; each line sized for ≤ 155 wpm
-CAPS = {
-    "fr": [(0.2, 2.3, "La file au portail."), (2.6, 7.1, "Le walkie-talkie. L’attente."),
-           (7.4, 9.5, f"Juste «{NB}Je suis là{NB}»."), (9.8, 14.3, "La classe le voit à l’écran.\nL’enfant se prépare."),
-           (14.6, 19.1, "L’enfant est remis."), (19.4, 26.2, "Chaque enfant remis est noté.\nL’esprit tranquille.")],
-    "en": [(0.2, 2.3, "The line at the gate."), (2.6, 7.1, "The walkie-talkie. The wait."),
-           (7.4, 9.5, "Just “I’m here.”"), (9.8, 14.3, "The class sees it on screen.\nThe child gets ready."),
-           (14.6, 19.1, "The child is handed over."), (19.4, 26.2, "Each hand-off is on record.\nPeace of mind.")],
+CAPS = {  # = the VO lines (vo.py); end card carries the tagline itself, so no caption there
+    "fr": [(0.2, 7.0, "15 h 30. La file au portail.\nLe walkie-talkie. L’attente."), (7.3, 9.6, f"Le parent arrive{NB}: «{NB}Je suis là{NB}»."),
+           (9.7, 14.3, "La classe le voit à l’écran.\nL’enfant se prépare."), (14.5, 19.1, "L’enfant est remis au parent."),
+           (19.3, 26.3, "Chaque enfant remis est noté.\nL’esprit tranquille, pour l’école et les parents.")],
+    "en": [(0.2, 7.0, "3:30. The line at the gate.\nThe walkie-talkie. The wait."), (7.3, 9.6, "The parent arrives: “I’m here.”"),
+           (9.7, 14.3, "The class sees it on screen.\nThe child gets ready."), (14.5, 19.1, "The child is handed over."),
+           (19.3, 26.3, "Each hand-off is on record.\nPeace of mind for schools and parents.")],
 }
 
 
@@ -87,20 +90,26 @@ def captions(lang, src, dst, tmp):
     run(["-i", src, "-vf", ",".join(filt), "-c:v", "libx264", "-crf", "16", "-preset", "medium", dst])
 
 
-def mix(music, tmp):
-    """Bed only (no VO yet): gentle compression keeps LRA ≤ 6 LU, linear gain to -14 LUFS, limiter -2.0 dBFS."""
+def mix(lang, music, tmp):
+    """Licensed stock bed + VO. Bed ducks ~8 dB under the voice (sidechain), sits ~20 LU under it during speech;
+    then linear gain to -14 LUFS and limiter -2.6 dBFS (AAC stays <= -1 dBTP)."""
+    vo = os.path.join(HERE, "out", "vo", f"vo_{lang}.wav")
     pre = os.path.join(tmp, "pre.wav")
-    run(["-i", music, "-af", "acompressor=threshold=-32dB:ratio=3:attack=30:release=600:makeup=5dB", pre])
+    run(["-ss", str(MUSIC_IN), "-t", "30", "-i", music, "-i", vo, "-filter_complex",
+         "[0:a]aresample=48000,aformat=channel_layouts=stereo,afade=t=in:d=0.25,volume=-17dB[m];"
+         "[1:a]loudnorm=I=-16:TP=-3:LRA=7,aresample=48000,asplit=2[v][k];"
+         "[m][k]sidechaincompress=threshold=0.02:ratio=4:attack=40:release=450:makeup=1[d];"
+         "[d][v]amix=inputs=2:normalize=0:duration=longest,atrim=0:30[out]", "-map", "[out]", pre])
     r = subprocess.run(["ffmpeg", "-nostdin", "-hide_banner", "-i", pre, "-af", "ebur128", "-f", "null", "-"],
                        capture_output=True, text=True).stderr
     i_lufs = float([l for l in r.splitlines() if l.strip().startswith("I:")][-1].split()[1])
     out = os.path.join(tmp, "mix.wav")
-    run(["-i", pre, "-af", f"volume={-14.0 - i_lufs:.2f}dB,alimiter=limit=-2.0dB:level=false:latency=1",
+    run(["-i", pre, "-af", f"volume={-14.0 - i_lufs:.2f}dB,alimiter=limit=-2.6dB:level=false:latency=1",
          "-ar", "48000", out])
     return out
 
 
-def build(lang, stock, opt):
+def build(lang, stock):
     with tempfile.TemporaryDirectory() as tmp:
         parts = [shot(lang, i, s, stock, tmp) for i, s in enumerate(SHOTS)] + [endcard(lang, tmp)]
         lst = os.path.join(tmp, "list.txt")
@@ -109,8 +118,8 @@ def build(lang, stock, opt):
         run(["-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", pic])
         capd = os.path.join(tmp, "cap.mp4")
         captions(lang, pic, capd, tmp)
-        audio = mix(os.path.join(MUS, f"option_{opt}.wav"), tmp)
-        dst = os.path.join(HERE, "out", f"kidvy_pickup_ad30_{lang}_music{opt}.mp4")
+        audio = mix(lang, MUSIC, tmp)
+        dst = os.path.join(HERE, "out", f"kidvy_pickup_ad30_{lang}_v3.mp4")
         run(["-i", capd, "-i", audio, "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "320k",
              "-t", "30", "-movflags", "+faststart", dst])
         return dst
@@ -119,6 +128,6 @@ def build(lang, stock, opt):
 if __name__ == "__main__":
     a = sys.argv[1:]
     stock = a[a.index("--stock") + 1] if "--stock" in a else os.path.join(HERE, "stock")
-    opt = a[a.index("--music") + 1] if "--music" in a else "A"
+    MUSIC = a[a.index("--music") + 1] if "--music" in a else os.path.join(HERE, "stock", "487400182.wav")
     for lang in [x for x in a if x in ("fr", "en")] or ["fr", "en"]:
-        print(build(lang, stock, opt))
+        print(build(lang, stock))

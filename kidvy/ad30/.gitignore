@@ -2,3 +2,4 @@ out/*.mp4
 out/music/*.wav
 stock/
 __pycache__/
+out/vo/

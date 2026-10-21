@@ -1,4 +1,4 @@
-# Kidvy Pickup — 30 s ad: arrival + hand-off (v2, rough cut)
+# Kidvy Pickup — 30 s ad: arrival + hand-off (v3)
 
 Rules: kidvy-pickup + kidvy-pickup-ad (12 criteria) + kidvy-music-director (Drive skills, read 2026-10-21).
 Footage: Drive › Adobe_Stock (15 Adobe Stock clips, licensed by the owner). Framing: "check-in" = « Je suis là » / "I’m here"; "check-out" = « Remis au parent » / "Handed over". Pills over footage, never a step-by-step walk-through.
@@ -17,12 +17,14 @@ Footage: Drive › Adobe_Stock (15 Adobe Stock clips, licensed by the owner). Fr
 | 21.6–26.4 | 753350890 @ 2.5 | same girl + dad walk off hand in hand | — | (same) |
 | 26.4–30.0 | end card | logo + tagline + CTA | — | Le ramassage, plus simple et plus calme. Demandez une démo : kidvy.com/pickup / Pickup, simpler and calmer. Request a demo: kidvy.com/pickup |
 
-## Music — 3 original options (you pick; nothing approved yet)
-Composed to the locked cut (`compose.py`, own composition rendered with the FluidR3 GM soundfont, MIT licence). Same form for all: soft open (0–7.2), rhythm enters on « Je suis là » (7.2), one lift on the hand-off (16.8), resolve on the end card (26.4).
-- **A** felt piano + nylon guitar, D major (default) · **B** piano + pizzicato strings, G major · **C** felt piano + soft shaker + warm pad, C major.
-- Hits measured vs the cut: 7.2 / 16.8 / 26.4 s within −54…+29 ms (limit 2 frames = 80 ms).
+## v3 changes (after review: "music no, logo wrong, we want voice over")
+- **Music:** Adobe Stock 487400182 "Folk Acoustic Light" (licensed 2026-10-21, free tier), 100 BPM = same grid as the cut. Played from 108.0 s so its final chord lands on the end card (26.4 s). The 3 composed beds were dropped.
+- **Logo:** official `logo_colour.svg` (Drive › kidvy-brand › assets) on the end card, replacing the typed "kidvy".
+- **Voice-over (temporary):** Kokoro v1.0 TTS (Apache-2.0), voices ff_siwis (FR) / af_heart (EN), built by `vo.py`. Replace with the paid talent's voice when the recording + release arrive. Higgsfield ElevenLabs voices were tried: 1.05 credits per language take, balance 0.92 — top up if you want those instead.
+- VO lines (captions match): FR « Quinze heures trente. La file au portail. Le walkie-talkie. L’attente. » · « Le parent arrive : je suis là. » · « La classe le voit à l’écran. L’enfant se prépare. » · « L’enfant est remis au parent. » · « Chaque enfant remis est noté. L’esprit tranquille, pour l’école et les parents. » · « Le ramassage, plus simple et plus calme. » / EN "Three-thirty. The line at the gate. The walkie-talkie. The wait." · "The parent arrives: I’m here." · "The class sees it on screen. The child gets ready." · "The child is handed over." · "Each hand-off is on record. Peace of mind for schools and parents." · "Kidvy Pickup. Simpler, and calmer."
+- Mix: VO at −16 LUFS, bed ducked ~8 dB under speech (≈ 18 LU below the voice), final −14.1 LUFS, −1.5 (EN) / −2.4 (FR) dBTP, LRA 5.3 / 3.6 LU; VO pace 152 (EN) / 151 (FR) wpm overall.
 
-## QC (all 6 renders, 2026-10-21)
+## QC (v2 picture, unchanged in v3)
 | Criterion | Rule | Measured |
 |---|---|---|
 | Duration | 30 s | 30.000 s |
@@ -37,12 +39,12 @@ Composed to the locked cut (`compose.py`, own composition rendered with the Flui
 
 ## Build
 1. Proxies: Adobe_Stock clips → 1080p 25 fps H.264 (`AdobeStock_<id>.mp4`) in one folder.
-2. `node kidvy/ad30/screens.js` (pills, end card) → `python3 -I kidvy/ad30/compose.py` (music) → `python3 -I kidvy/ad30/build.py fr en --stock <proxies> --music A|B|C`.
+2. `node kidvy/ad30/screens.js` (pills, end card) → `python3 -I kidvy/ad30/vo.py <kokoro model dir>` → `python3 -I kidvy/ad30/build.py fr en --stock <proxies> --music <AdobeStock_487400182.wav>`.
 
 ## Open items (hand-off list)
-1. Pick music A, B or C.
+1. Approve the stock track and the temporary voice.
 2. CTA kidvy.com/pickup still returns 404 (checked 2026-10-21) → must be live before release.
-3. No VO: no recording from the client’s paid voice talent yet → captions carry the words (no temporary text-to-speech, per kidvy-pickup-ad).
+3. VO is temporary text-to-speech (you approved it 2026-10-21); swap in the paid talent's voice before release.
 4. Casting: the parents in the queue (624086363) and the classroom teacher/child (1831479379, 2115633640) are different people from the hero dad and girl. Acceptable as "other families / staff"; the owner should confirm. Kids appear as licensed stock actors (owner still to confirm, brief §9).
 5. Counsel check before paid ads: « Chaque enfant remis est noté » / "Each hand-off is on record".
 6. Only 16:9 delivered; 9:16 and 1:1 need native reframes.
