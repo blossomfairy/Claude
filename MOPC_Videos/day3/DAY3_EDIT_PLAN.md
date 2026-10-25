@@ -51,3 +51,13 @@ Rules applied: mopc-content, mopc-video-editor, mopc-color-grade, footage-editin
 - Loudness: -14 LUFS integrated, ≤ -1 dBTP (two-pass). Keep the speaker's own pause at joins.
 - Titles are ink on a paper or tint pill (`video.py lower_third/caption`), never white text with a drop shadow. Logo and end card follow the mopc.json rules.
 - Gates before delivery: `mopc_qc.py` exit 0, `ad_check`, contrast ≥ 4.5, a faces-vs-text check, and a look at the contact sheet.
+
+## Decisions (2026-10-25, after research)
+| Decision | Choice | Why |
+|---|---|---|
+| Sign-off line | **Drop the words. Keep the installers walking back to the van (1537 7.0–9.5 s) as a wordless closer.** | The line was cued ("Right to the camera. Action."), repeated over several takes and delivered into the lens. That breaks the no-eye-contact rule, the guide's "questions, not lines", and the 2026-10-08 rejected entry. Research found no hard data either way; practitioner sources consistently say natural, unscripted delivery beats polished scripted lines on Meta. |
+| R5C grade | **Canon official C-Log3 / Cinema Gamut to BT.709, 65-point 3D LUT** (Canon support page for the EOS R5 C, "Canon lookup table"). Correct exposure before the LUT. | The learned cube is FS7 S-Log3 only. Third-party packs are unverified. |
+| Drone grade | **DJI official Mavic 3 "D-Log to Rec.709" LUT** (dji.com/lut). | The SRT metadata says `color_md: d_log` (not D-Log M), f/2.8 variable aperture. |
+| Jev review | Spec ready: `jev_review_day3.json`. **Not sent: no key in this session.** | Run `jev_adapters.py send jev_review_day3.json`, then again with `--reverse`, and act only where both orders agree. |
+
+The drone SRT files carry GPS for the shoot location. Never publish them.
