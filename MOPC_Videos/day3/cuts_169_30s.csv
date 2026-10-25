@@ -1,0 +1,11 @@
+clip,in,out,label,super
+NBM_FX9_1451.MXF,0.5,4.0,arrival_wide,Pictou County
+NBM_FX9_1453.MXF,0.5,3.0,crew_briefing,
+NBM_FX9_1562.MXF,5.0,7.5,tower_site_walk,
+NBM_FX9_1563.MXF,22.0,26.0,harness_on,
+NBM_FX9_1563.MXF,76.0,79.0,harness_close,
+A009C267_261008Z6_CANON.MXF,5.0,9.0,tower_climb_wide,
+A009C267_261008Z6_CANON.MXF,100.0,103.0,tower_gear_top,
+NBM_FX9_1514.MXF,1.0,4.5,install_siding,
+NBM_FX9_1513.MXF,0.5,2.5,dog_insert,
+ENDCARD,0,5.0,endcard,See what's available at your address
