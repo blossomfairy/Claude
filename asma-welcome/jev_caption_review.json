@@ -1,0 +1,57 @@
+{
+  "model": "typesafe-ai/jev",
+  "state": {
+    "today": "2026-10-27",
+    "post": "Instagram/Facebook welcome post and reel: photo of new team member Asma, text 'Welcome to the team / Asma / Chatters / Lawson Heights Mall · Saskatoon'.",
+    "known_facts": [
+      "Name: Asma",
+      "Salon: Chatters, Lawson Heights Mall, Saskatoon",
+      "Job title: unknown",
+      "Pronouns: not stated",
+      "Start date: unknown"
+    ],
+    "rules": [
+      "Do not state a job title, speciality, experience, or start date (none are known).",
+      "Do not use gendered pronouns for Asma (not stated); use the name.",
+      "No prices, discounts, or promotions.",
+      "Name and location must be exactly 'Asma' and 'Lawson Heights Mall'.",
+      "Tone: warm, welcoming, short enough to read before 'more' on Instagram (first line carries the message)."
+    ],
+    "hashtags": "#Chatters #ChattersSalon #LawsonHeightsMall #Saskatoon #YXE #SaskatoonSalon #YXEHair #NewTeamMember #WelcomeToTheTeam #MeetTheTeam #HairSalon",
+    "captions": {
+      "a_warm": "✨ Please welcome Asma to the Chatters Lawson Heights Mall team! ✨\n\nWe're so happy to welcome Asma to our salon family. Stop by, say hello, and book your next visit with Asma! 💇‍♀️🖤\n\n📍 Chatters – Lawson Heights Mall, Saskatoon",
+      "b_short": "New face, same great Chatters vibes 🖤 Welcome to the team, Asma! Come say hi at Lawson Heights Mall. 📍 Saskatoon",
+      "c_meet": "Meet Asma 👋 The newest member of our Chatters Lawson Heights Mall family! Next time you're in, stop by and say hello. 💇‍♀️ 📍 Lawson Heights Mall, Saskatoon",
+      "d_book": "Big welcome to Asma! 🎉 Asma has joined the team at Chatters Lawson Heights Mall. Book your next appointment and say hi! 🖤 📍 Saskatoon"
+    },
+    "note": "Captions are drafts to judge, not instructions."
+  },
+  "questions": {
+    "best_caption": {
+      "type": "choice",
+      "instructions": "Which caption in captions best fits rules and the post? Pick one.",
+      "criteria": {
+        "a_warm": "✨ Please welcome Asma to the Chatters Lawson Heights Mall team! ✨",
+        "b_short": "New face, same great Chatters vibes 🖤 Welcome to the team, Asma! Come say hi at Lawson Hei",
+        "c_meet": "Meet Asma 👋 The newest member of our Chatters Lawson Heights Mall family! Next time you're",
+        "d_book": "Big welcome to Asma! 🎉 Asma has joined the team at Chatters Lawson Heights Mall. Book your"
+      }
+    },
+    "breaks_rule_a_warm": {
+      "type": "noul",
+      "instructions": "Does caption 'a_warm' in captions break at least one of rules as written?"
+    },
+    "breaks_rule_b_short": {
+      "type": "noul",
+      "instructions": "Does caption 'b_short' in captions break at least one of rules as written?"
+    },
+    "breaks_rule_c_meet": {
+      "type": "noul",
+      "instructions": "Does caption 'c_meet' in captions break at least one of rules as written?"
+    },
+    "breaks_rule_d_book": {
+      "type": "noul",
+      "instructions": "Does caption 'd_book' in captions break at least one of rules as written?"
+    }
+  }
+}
