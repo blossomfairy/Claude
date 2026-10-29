@@ -14,7 +14,7 @@
 | Alt text | "Before and after: copper-red hair changed to brown with blonde dimensional highlights and soft curls, by Afia at Chatters Lawson Heights." | Same |
 | Reel audio | Add a trending upbeat track in-app (the file is silent) | Same |
 | Cover | Pick the side-by-side frame (about 8s) as the Reel cover | Same |
-| Share | Share the reel to Stories with a location sticker and a "Book now" link sticker | Share to the page's Story |
+| Story | Post `afia_story.jpg` (9:16). Put the "Book now" link sticker and location sticker in the empty band under "Tap the link below to book" | Same, on the page's Story |
 
 Post the first comment yourself (e.g. "Which look do you love more – before or after? 👀"). Reply to every comment within the first hour.
 
