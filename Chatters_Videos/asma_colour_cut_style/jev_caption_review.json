@@ -1,0 +1,53 @@
+{
+ "jev_called": false,
+ "judge": "local stand-in Qwen/Qwen2.5-1.5B-Instruct via system-one-judgments/system_one.py (no AI_GATEWAY_API_KEY in this environment)",
+ "date": "2026-11-01",
+ "spec": "jev_caption_spec.json",
+ "results": {
+  "C": {
+   "breaks_rule": {
+    "p_yes": 0.7785,
+    "ts_confidence": 0.557
+   },
+   "clear_cta": {
+    "p_yes": 0.9859,
+    "ts_confidence": 0.972
+   },
+   "quality": {
+    "score": 2.961,
+    "ts_confidence": 0.961
+   }
+  },
+  "B": {
+   "breaks_rule": {
+    "p_yes": 0.7547,
+    "ts_confidence": 0.509
+   },
+   "clear_cta": {
+    "p_yes": 0.9892,
+    "ts_confidence": 0.978
+   },
+   "quality": {
+    "score": 2.968,
+    "ts_confidence": 0.968
+   }
+  },
+  "A": {
+   "quality": {
+    "score": 2.911,
+    "ts_confidence": 0.911
+   },
+   "breaks_rule": {
+    "p_yes": 0.707,
+    "ts_confidence": 0.413
+   },
+   "clear_cta": {
+    "p_yes": 0.968,
+    "ts_confidence": 0.937
+   }
+  }
+ },
+ "reading": "No separation: breaks_rule 0.71-0.78 at low confidence (the local model over-flags style rules, see system-one-judgments), clear_cta 0.97-0.99, quality ~2.9-3.0 of 3 for all. Decided by caption-bank rules: B has one action and puts service + Asma in the first 60 chars; A and C each carry two actions (save + book).",
+ "chosen": "B",
+ "claims_lint": "0 FAIL; WARN Asma not on 2026-10-03 roster"
+}

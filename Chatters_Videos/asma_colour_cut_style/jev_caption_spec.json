@@ -1,0 +1,72 @@
+{
+ "items": [
+  {
+   "id": "A",
+   "state": {
+    "post": "Instagram Reel: after photos of long ash blonde colour with curls, colour + cut + style by Asma, Chatters Lawson Heights Mall, Saskatoon",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (book OR save counts as the same booking intent).",
+     "No invented prices, promotions, job titles or techniques; the exact colour technique is unknown.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more')."
+    ],
+    "caption": "Soft ash blonde, blended from the root, finished with big curls.\n\nColour, cut and style by Asma at Chatters Lawson Heights.\n\nSave this for your next colour appointment, or send it to the friend who keeps talking about going lighter.\n\nBook with Asma at Lawson Heights Mall: chatters.ca or 306-931-3010."
+   }
+  },
+  {
+   "id": "B",
+   "state": {
+    "post": "Instagram Reel: after photos of long ash blonde colour with curls, colour + cut + style by Asma, Chatters Lawson Heights Mall, Saskatoon",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (book OR save counts as the same booking intent).",
+     "No invented prices, promotions, job titles or techniques; the exact colour technique is unknown.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more')."
+    ],
+    "caption": "Ash blonde, blended root, big soft curls. Colour, cut & style by Asma at Chatters Lawson Heights Mall, Saskatoon. Book online at chatters.ca or call 306-931-3010."
+   }
+  },
+  {
+   "id": "C",
+   "state": {
+    "post": "Instagram Reel: after photos of long ash blonde colour with curls, colour + cut + style by Asma, Chatters Lawson Heights Mall, Saskatoon",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (book OR save counts as the same booking intent).",
+     "No invented prices, promotions, job titles or techniques; the exact colour technique is unknown.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more')."
+    ],
+    "caption": "Thinking about going ash blonde? This is colour, cut and style by Asma at Chatters Lawson Heights. Save it for your consultation, then book with Asma: chatters.ca or 306-931-3010, Lawson Heights Mall, Saskatoon."
+   }
+  }
+ ],
+ "questions": [
+  {
+   "id": "breaks_rule",
+   "type": "noul",
+   "question": "Does the caption break at least one of the rules as written?"
+  },
+  {
+   "id": "clear_cta",
+   "type": "noul",
+   "question": "Does the caption end with one clear action telling the reader how to book?"
+  },
+  {
+   "id": "quality",
+   "type": "score",
+   "levels": [
+    "weak: generic or confusing",
+    "ok: clear but flat",
+    "good: specific, local, natural voice",
+    "excellent: specific, local, natural and makes a reader want to book"
+   ],
+   "question": "How strong is this caption for a local salon Reel?"
+  }
+ ]
+}
