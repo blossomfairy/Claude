@@ -1,0 +1,89 @@
+<title>Marina Before &amp; After</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Montserrat:wght@400;600;700&display=swap">
+<style>
+/* Layout: one phone-first column, the reel framed like a phone screen, caption and checklist below. */
+:root {
+  --bg: #F7F7F7; --paper: #FFFFFF; --ink: #000000; --muted: #5d5a59;
+  --line: #CECECE; --accent: #493836;
+  --display: "Playfair Display", Georgia, serif;
+  --body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141212; --paper: #1e1b1b; --ink: #F4F1F0; --muted: #b3aaa8; --line: #3a3534; --accent: #d9b8b2; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141212; --paper: #1e1b1b; --ink: #F4F1F0; --muted: #b3aaa8; --line: #3a3534; --accent: #d9b8b2; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 48px; }
+main { max-width: 440px; margin: 0 auto; display: grid; gap: 22px; }
+h1 { font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1.15; margin: 0; text-wrap: balance; }
+.eyebrow { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 6px; }
+.phone { aspect-ratio: 9 / 16; max-width: 100%; width: 100%; background: #000; border-radius: 18px; overflow: hidden; }
+video { width: 100%; height: 100%; display: block; object-fit: cover; }
+.note { font-size: .82rem; color: var(--muted); margin: -10px 0 0; }
+section { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 10px; min-width: 0; }
+h2 { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; margin: 0; font-weight: 700; }
+.cap { white-space: pre-wrap; margin: 0; font-size: .95rem; }
+button { justify-self: start; font: 600 .85rem var(--body); color: var(--ink); background: transparent; border: 1px solid var(--ink); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: .9rem; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: .88rem; font-variant-numeric: tabular-nums; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">Chatters Lawson Heights · Reel</p>
+    <h1>Colour, Cut &amp; Style by Marina</h1>
+  </header>
+
+  <div class="phone">
+    <video id="reel" src="marina_reel_preview.mp4" poster="poster.jpg" controls playsinline loop preload="metadata"></video>
+  </div>
+  <p class="note">Preview at 720p with the piano bed. Full-quality files (pizzicato, piano, guitar, silent) are in GitHub under Chatters_Videos/marina_before_after.</p>
+
+  <section>
+    <h2>Instagram caption</h2>
+    <p class="cap" id="cap">Brassy, frizzy lengths to soft blended blonde with a fresh cut and loose waves.
+
+Colour, cut and style by Marina, Elite Stylist at Chatters Lawson Heights.
+
+Book with Marina at Lawson Heights Mall: chatters.ca or 306-931-3010.</p>
+    <button type="button" id="copy">Copy caption</button>
+  </section>
+
+  <section>
+    <h2>First comment</h2>
+    <p class="cap">#Chatters #LawsonHeightsMall #Saskatoon #YXEHair #BeforeAndAfter</p>
+  </section>
+
+  <section>
+    <h2>Before posting</h2>
+    <ul>
+      <li>Written consent from the client. Face, glasses and mirror reflections are cropped out of every shot.</li>
+      <li>Confirm the services with Marina (colour, cut and style is read from the photos).</li>
+      <li>Pick a music bed, or post the silent file with a trending sound.</li>
+      <li>Post Tue–Thu 6:30–8:30 pm or Sat 10 am–noon.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Checks</h2>
+    <dl>
+      <dt>Length</dt><dd>20.5 s, 1080×1920</dd>
+      <dt>Pacing</dt><dd>21 shots on a 92 BPM grid, house check pass</dd>
+      <dt>Loudness</dt><dd>−14.0 LUFS, −1.3 dBTP</dd>
+      <dt>Caption</dt><dd>claims_lint 0 fail, 0 warn</dd>
+    </dl>
+  </section>
+</main>
+
+<script>
+document.getElementById('copy').addEventListener('click', async (e) => {
+  const t = document.getElementById('cap').textContent;
+  try { await navigator.clipboard.writeText(t); e.target.textContent = 'Copied'; }
+  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('cap'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); e.target.textContent = 'Selected, press copy'; }
+});
+</script>
