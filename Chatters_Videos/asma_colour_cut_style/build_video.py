@@ -5,6 +5,7 @@ serif title + "With Chatters" script, white bold-sans lower third, white logo ov
 zoom <= 1.6x, cuts on 1-1.5 beat grid, last shot pulls back to the hook frame so the reel loops.
 The in-store "Brow Wax $10" whiteboard (photos 2-4, top 28 %) is cropped out of every shot.
 """
+import math
 import os
 import subprocess
 import sys
@@ -105,8 +106,26 @@ def window(pi, cx, cy, z):
     ymin = BOARD_Y if pi in (2, 3, 4) else 0
     y0 = min(max(cy * IH - ch / 2, ymin), IH - ch)
     assert pi not in (2, 3, 4) or y0 >= BOARD_Y - 1, f"board visible in photo {pi}"
-    assert z >= 0.63 - 1e-9, "upscale over 1.6x"
+    assert z >= 0.63 - 2e-2, "upscale over 1.6x"
     return (x0, y0, x0 + cw, y0 + ch)
+
+
+WHIPS = {4, 9, 14, 19}   # whip-pan into these shots; the rest are hard cuts with a beat punch
+WHIP_HALF = 0.1
+
+
+def shot_frame(i, t):
+    """Reel motion: push over the shot, beat punch-in at the cut, light handheld drift."""
+    pi, beats, cx, cy, z0, z1 = SHOTS[i]
+    dt = t - starts[i]
+    p = min(1.0, max(0.0, dt / (beats * BEAT)))
+    p = p * p * (3 - 2 * p)
+    z = z0 + (z1 - z0) * p
+    if i not in (0, len(SHOTS) - 1):
+        z = max(0.63, z * (1 - 0.06 * math.exp(-dt / 0.11)))  # punch, settles in ~0.3 s
+    cx += 0.006 * math.sin(2 * math.pi * 0.6 * t + i)
+    cy += 0.004 * math.cos(2 * math.pi * 0.45 * t + 2 * i)
+    return P[pi].resize((W, H), Image.BICUBIC, box=window(pi, cx, cy, z))
 
 
 ff = subprocess.Popen(
@@ -119,10 +138,26 @@ nframes = round(TOTAL * FPS)
 for n in range(nframes):
     t = n / FPS
     i = max(j for j in range(len(SHOTS)) if starts[j] <= t + 1e-9)
-    pi, beats, cx, cy, z0, z1 = SHOTS[i]
-    p = (t - starts[i]) / (beats * BEAT)
-    p = p * p * (3 - 2 * p)  # ease
-    fr = P[pi].resize((W, H), Image.BICUBIC, box=window(pi, cx, cy, z0 + (z1 - z0) * p)).convert("RGBA")
+    near = [j for j in WHIPS if abs(t - starts[j]) < WHIP_HALF]
+    if near:
+        j = near[0]
+        u = (t - (starts[j] - WHIP_HALF)) / (2 * WHIP_HALF)
+        u = u * u * (3 - 2 * u)
+        a = shot_frame(j - 1, min(t, starts[j] - 1e-3))
+        b = shot_frame(j, max(t, starts[j]))
+        strip = Image.new("RGB", (2 * W, H))
+        strip.paste(a, (0, 0))
+        strip.paste(b, (W, 0))
+        x = int(u * W)
+        fr = strip.crop((x, 0, x + W, H))
+        k = 1 + int(30 * math.sin(math.pi * u))  # motion blur peaks mid-whip
+        fr = fr.resize((max(1, W // k), H), Image.BILINEAR).resize((W, H), Image.BILINEAR)
+    else:
+        fr = shot_frame(i, t)
+    fr = fr.convert("RGBA")
+    fl = max(0.0, 1 - abs(t - starts[-1]) / 0.18) * 0.75  # flash into the reveal
+    if fl > 0:
+        fr = Image.blend(fr, Image.new("RGBA", (W, H), (255, 255, 255, 255)), fl)
     over(fr, title, 1.0 if t < 0.3 else fade(t, 0, starts[1] - 0.05))
     over(fr, lower, fade(t, *LOWER_T))
     over(fr, endlogo, fade(t, *END_T, f=0.35))
