@@ -77,14 +77,14 @@ def quote_block(d, text, top, bottom):
 def review_story(stylist, who, text, tint):
     img = Image.new("RGB", (W, H), tint)
     d = ImageDraw.Draw(img)
-    ctext(d, 330, "CLIENT REVIEW", E.F(30, "Bold"), ls=3)
+    ctext(d, 330, "CLIENT REVIEW · LAWSON HEIGHTS MALL", E.F(28, "Bold"), ls=2)
     stars(d, 410)
     d.text((W // 2, 640), "“", font=E.serif(240), fill=E.INK, anchor="ms")
     last = quote_block(d, text, 640, 1140)
     y = max(last + 90, 1190)
     d.line((W // 2 - 60, y, W // 2 + 60, y), fill=E.INK, width=2)
     ctext(d, y + 80, who, E.F(44, "SemiBold"))
-    ctext(d, y + 135, f"5 out of 5 for {stylist}, Lawson Heights", E.F(30, "Medium"))
+    ctext(d, y + 135, f"5 out of 5 for {stylist} at Chatters Lawson Heights", E.F(30, "Medium"))
     button(d, 1430, f"BOOK WITH {stylist.upper()}")
     logo(img, 1590)
     return img
@@ -93,13 +93,13 @@ def review_story(stylist, who, text, tint):
 def cta_story():
     img = Image.new("RGB", (W, H), E.GROUND)
     d = ImageDraw.Draw(img)
-    ctext(d, 330, "LAWSON HEIGHTS MALL", E.F(30, "Bold"), ls=3)
+    ctext(d, 330, "CHATTERS · LAWSON HEIGHTS MALL", E.F(28, "Bold"), ls=2)
     for i, ln in enumerate(["Thank you for", "the kind words."]):
         d.text((W // 2, 560 + i * 120), ln, font=E.serif(104), fill=E.INK, anchor="ms")
     d.line((W // 2 - 60, 780, W // 2 + 60, 780), fill=E.INK, width=2)
     for i, ln in enumerate(["Rose, Afia, Lorne, Fola, Marina:", "every quote here is a real client."]):
         ctext(d, 880 + i * 62, ln, E.F(40, "Medium"))
-    for i, ln in enumerate(["Bay 30, 134 Primrose Drive, Saskatoon", "306-931-3010"]):
+    for i, ln in enumerate(["Lawson Heights Mall, Bay 30", "134 Primrose Drive, Saskatoon", "306-931-3010"]):
         ctext(d, 1080 + i * 58, ln, E.F(36, "Regular"))
     button(d, 1430, "BOOK ONLINE")
     logo(img, 1590)
