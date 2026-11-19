@@ -40,8 +40,8 @@ def vframe(t):
 
 # (source, beats, t_in(video) | None, cx, cy, z0, z1, label)   z = visible width fraction of the source
 SHOTS = [
-    ("V", 2.5, 4.25, .50, .50, .96, .90, None),        # hook: after in motion + title
-    ("before", 2, None, .47, .50, .74, .70, "Before"),
+    ("before", 2.5, None, .47, .50, .74, .70, "Before"),  # hook (user 2026-11-19): before first + title
+    ("V", 2, 4.25, .50, .50, .96, .90, "After"),         # after in motion
     ("SPLIT", 2.5, None, 0, 0, 0, 0, None),            # before | after
     ("after1", 1, None, .50, .55, .74, .70, "After"),
     ("V", 1, 1.40, .50, .55, .92, .86, None),           # curls bounce
