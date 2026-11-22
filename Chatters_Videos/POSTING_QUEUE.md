@@ -9,7 +9,7 @@ Post 6:30-8:30 pm or 11 am-1 pm (Saskatchewan time) until Instagram Insights "Mo
 | 3 | Sat Nov 28 | Gabby colour, cut & style | `gabby_colour_cut_style/` | B piano | `caption.txt` |
 | 4 | Tue Dec 1 | Asma Christmas before/after | `asma_xmas_before_after/` | A celesta + sleigh bells | `caption.txt` (B) + `first_comment.txt` |
 | 5 | Thu Dec 3 | Asma before/after (before first) | `asma_before_after/` | B piano | `caption.txt` |
-| 6 | Sat Dec 5 | Lorne Stylist Highlight v2 (Lorne on camera, his voice) | `stylist_highlight/lorne/` | `_v2_` D / E / F | `caption.txt` |
+| 6 | Sat Dec 5 | Lorne Stylist Highlight v3 (Lorne on camera, his voice, 4 clients) | `stylist_highlight/lorne/` | `_v3_` D / E / F | `caption.txt` |
 
 October deliverables (Lorne cut/perm/style + carousel, Rose layers, reviews set, They-listen carousel/stories, Gabby intro, Afia blowout, Seniors Day v7, silent-service FINAL) are on Google Drive in `Chatters Lawson Heights\2026-10\`; slot them between these on Mon/Wed/Fri as carousels and stories.
 

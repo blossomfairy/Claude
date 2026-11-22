@@ -1,3 +1,14 @@
+# Lorne stylist highlight v3 (2026-11-23): Lorne on camera + 4 clients
+
+**Use these:** `CHATTERS_LORNE_stylist_highlight_v3_D_pop.mp4` / `_v3_E_lofi.mp4` / `_v3_F_funk.mp4` (26.5 s).
+- 0-4 s Lorne on camera, his voice, "Meet Lorne" → "Lorne, Elite Stylist"
+- his perm-care tip continues over: client 1 long perm (before / wrap / after), client 2 silver short perm (before / after)
+- back to Lorne + "Named in a 5-star Google review"
+- music lifts: "More perms by Lorne": client 3 long blonde perm, client 4 short dark curls (before → after), clients 1 + 2 again
+- Lorne's portrait + "Book with Lorne · chatters.ca · 306-931-3010" + logo
+Sources (user uploads 2026-11-23): Lorne_Perm_Cut_Style_Reel_v3.mp4 (client 2 + portrait), two "Hair by Lorne" MTVideo clips (clients 3, 4), badges/watermarks cropped off; client 4's side profile not used.
+Before posting: Lorne's OK (portrait + Hair by Lorne content), consent from clients 2-4.
+
 # Lorne stylist highlight v2 (2026-11-23): Lorne on camera, his own voice
 
 **Use these:** `CHATTERS_LORNE_stylist_highlight_v2_D_pop.mp4` / `_v2_E_lofi.mp4` / `_v2_F_funk.mp4` (Lorne's perm-care tip voice + music bed that lifts on the CTA; -14 LUFS / -1.3 dBTP; qc PASS, house_check talking PASS).
