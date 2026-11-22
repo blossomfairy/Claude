@@ -32,11 +32,9 @@ STYLISTS = {
         "book": "Book with Lorne",              # on the online roster -> bookable by name
         # stills cut from the graded 2026-10-18 reel, labels cropped off; face/mirror-free
         "shots": [  # (still, beats, cx, cy, z0, z1, label)
-            ("after1", 2.5, .50, .45, .94, .70, None),        # hook: whips in from wide
-            ("after3", .5, .50, .40, .66, .64, None),          # half-beat burst
-            ("after5", .5, .45, .55, .66, .64, None),
-            ("after2", .5, .55, .35, .66, .64, None),
-            ("after1", .5, .50, .70, .66, .64, None),
+            ("after1", 2.5, .50, .45, .80, .72, None),        # hook: slow push-in (user: "camera moves too fast")
+            ("after3", 1, .50, .40, .70, .67, None),
+            ("after5", 1, .45, .55, .70, .67, None),
             ("after3", 2, .50, .50, .92, .86, None),          # who: lower third
             ("before", 1.5, .50, .50, .92, .86, "Before"),    # the work
             ("before2", 1, .60, .50, .92, .86, "Before"),
@@ -58,7 +56,7 @@ STYLISTS = {
             ("wrap", 1, .55, .40, .72, .68, None),
             ("after1", 5, .50, .45, .70, .94, None),          # CTA + logo, pulls back to the hook framing (loop)
         ],
-        "flash_at": 10, "who": (5, 6), "skills_at": (14, 17), "proof_at": (17, 20),
+        "flash_at": 8, "who": (3, 4), "skills_at": (12, 15), "proof_at": (15, 18),
     },
 }
 
@@ -139,11 +137,11 @@ def frame(i, t):
     k, beats, cx, cy, z0, z1, _ = SHOTS[i]
     dt = t - starts[i]
     p = min(1.0, max(0.0, dt / (beats * BEAT)))
-    e = 1 - (1 - p) ** 3 if i == 0 else p * p * (3 - 2 * p)
+    e = p * p * (3 - 2 * p)  # gentle ease everywhere
     z = z0 + (z1 - z0) * e
     if 0 < i < len(SHOTS) - 1:
-        z *= 1 - 0.07 * math.exp(-dt / 0.10)
-    cx += (0.18 if i % 2 else -0.18) * (e - 0.5)       # pan across the still (stills are only ~1.5x wide)
+        z *= 1 - 0.025 * math.exp(-dt / 0.15)  # soft beat punch
+    cx += (0.06 if i % 2 else -0.06) * (e - 0.5)       # slow drift across the still
     cx += 0.004 * math.sin(2 * math.pi * 0.6 * t + i)
     cy += 0.003 * math.cos(2 * math.pi * 0.45 * t + 2 * i)
     return view(P[k], cx, cy, z)
@@ -164,7 +162,7 @@ for n in range(round(TOTAL * FPS)):
     t = n / FPS
     i = max(j for j in range(len(SHOTS)) if starts[j] <= t + 1e-9)
     fr = frame(i, t).convert("RGBA")
-    over(fr, O["meet"], 1.0 if t < 0.3 else fade(t, 0, starts[5] - 0.05))
+    over(fr, O["meet"], 1.0 if t < 0.3 else fade(t, 0, starts[C["who"][0]] - 0.05))
     over(fr, O["who"], fade(t, *span(*C["who"])))
     over(fr, O["skills"], fade(t, *span(*C["skills_at"])))
     over(fr, O["proof"], fade(t, *span(*C["proof_at"])))

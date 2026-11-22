@@ -2,9 +2,9 @@
 
 | File | Audio |
 |---|---|
-| `CHATTERS_LORNE_stylist_highlight_A_pizz92.mp4` | pizzicato, -14.0 LUFS / -1.3 dBTP |
-| `CHATTERS_LORNE_stylist_highlight_B_piano92.mp4` | piano, -14.0 LUFS / -1.3 dBTP |
-| `CHATTERS_LORNE_stylist_highlight_C_guitar92.mp4` | nylon guitar, -14.0 LUFS / -1.3 dBTP |
+| `CHATTERS_LORNE_stylist_highlight_D_pop92.mp4` | pop groove (Rhodes, bass, drums), -14.0 LUFS / -1.3 dBTP |
+| `CHATTERS_LORNE_stylist_highlight_E_lofi92.mp4` | lo-fi, -14.0 LUFS / -1.3 dBTP |
+| `CHATTERS_LORNE_stylist_highlight_F_funk92.mp4` | funk (clav, slap bass), -14.2 LUFS / -1.1 dBTP |
 | `CHATTERS_LORNE_stylist_highlight_SILENT.mp4` | none (trending sound in-app) |
 
 On screen: "Meet Lorne" → "Lorne, Elite Stylist / Chatters Lawson Heights" → Before / The perm wrap / After → "Cuts, perms & styling" → "Named in a 5-star Google review" → "Book with Lorne · chatters.ca · 306-931-3010 · Lawson Heights Mall, Saskatoon" + logo.
