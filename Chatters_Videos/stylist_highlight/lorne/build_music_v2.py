@@ -8,7 +8,9 @@ import sys
 import mido
 
 D = sys.path[0] + "/"
-BPM, TPB, END = 92, 480, 26.5
+import os
+BPM, TPB = 92, 480
+END = float(os.environ.get("END_BEAT", "26.5"))
 CH = [(45, [57, 60, 64, 67]), (50, [57, 60, 62, 65]), (43, [55, 59, 62, 65]), (48, [55, 59, 64, 67])]
 OPTS = {"D_pop": (4, 33, 0.0, True), "E_lofi": (4, 32, 0.12, False), "F_funk": (7, 36, 0.0, True)}
 

@@ -1,3 +1,11 @@
+# Lorne stylist highlight v2 (2026-11-23): Lorne on camera, his own voice
+
+**Use these:** `CHATTERS_LORNE_stylist_highlight_v2_D_pop.mp4` / `_v2_E_lofi.mp4` / `_v2_F_funk.mp4` (Lorne's perm-care tip voice + music bed that lifts on the CTA; -14 LUFS / -1.3 dBTP; qc PASS, house_check talking PASS).
+Source: "Lorne - Ask a Stylist" (2026-09-18) from the user's Drive; captions from its own subtitle track, verbatim.
+Order: Lorne on camera + "Meet Lorne" → "Lorne, Elite Stylist" → Before / The perm wrap / After (his voice continues) → Lorne on camera + "Named in a 5-star Google review" → "Book with Lorne" + logo.
+
+v1 below (work only) is superseded.
+
 # Lorne stylist highlight: posting plan (2026-11-23)
 
 | File | Audio |
