@@ -1,0 +1,36 @@
+{
+ "jev_called": false,
+ "judge": "written rules only (house rules in jev_caption_spec.json + previous run's process + 2026-11-20 reach evidence: DM sends drive non-follower reach; comments and saves help).",
+ "reason": "AI_GATEWAY_API_KEY is unset and the local stand-in (system-one-judgments) cannot install: torch/huggingface downloads blocked by the agent proxy, confirmed 2026-11-22; install not retried. No model scores exist for this run.",
+ "date": "2026-11-22",
+ "spec": "jev_caption_spec.json",
+ "results": {
+  "A": {
+   "breaks_rule": "no",
+   "clear_cta": "yes",
+   "shareable": "no",
+   "quality": "good",
+   "first_line_chars": 122,
+   "notes": "Holiday-ready hook (Christmas photos); clear before/after description builds saves; comment question; no send trigger."
+  },
+  "B": {
+   "breaks_rule": "no",
+   "clear_cta": "yes",
+   "shareable": "yes",
+   "quality": "excellent",
+   "first_line_chars": 122,
+   "notes": "Send-to-a-friend hook that is also the holiday angle; framed as who it is for, not a second imperative, so the booking line stays the single CTA; no question (moved to first comment)."
+  },
+  "C": {
+   "breaks_rule": "no",
+   "clear_cta": "yes",
+   "shareable": "no",
+   "quality": "good",
+   "first_line_chars": 123,
+   "notes": "Transformation hook naming the before/after; save nudge phrased as 'worth keeping' (not an imperative) to keep one CTA; comment question; no send trigger."
+  }
+ },
+ "reading": "All three pass every written rule and claims_lint (0 FAIL; only the expected WARN that Asma is not on the online roster). B chosen: it is the only one built to earn DM sends, the behaviour tied most to non-follower reach, and it carries the holiday angle in the same line.",
+ "chosen": "B",
+ "claims_lint": "A/B/C, caption.txt, caption_facebook.txt: 0 FAIL; WARN Asma not on roster (expected, phone booking line used)"
+}
