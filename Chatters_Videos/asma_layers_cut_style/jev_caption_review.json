@@ -1,0 +1,29 @@
+{
+ "jev_called": false,
+ "judge": "written rules only (house rules in jev_caption_spec.json + caption-bank.md + 2026-11-20 reach evidence). Local stand-in Qwen/Qwen2.5-1.5B-Instruct via system-one-judgments/system_one.py could NOT run: no AI_GATEWAY_API_KEY; torch/transformers not installed; download.pytorch.org and huggingface.co both refused by the agent proxy (403); no cached weights. No model scores exist for this run.",
+ "date": "2026-11-22",
+ "spec": "jev_caption_spec.json",
+ "results": {
+  "A": {
+   "breaks_rule": "no",
+   "clear_cta": "yes",
+   "first_line_chars": 122,
+   "notes": "POV hook; service + Asma + mall + Saskatoon in line 1 but at 122 chars it sits on the fold; comment question; line 2 mostly re-describes the visual; no send trigger."
+  },
+  "B": {
+   "breaks_rule": "no",
+   "clear_cta": "yes",
+   "first_line_chars": 106,
+   "notes": "Curiosity hook (avoids the burnt-out 'wait for it' wording); shortest first line; one save-worthy takeaway + comment question; no send trigger."
+  },
+  "C": {
+   "breaks_rule": "no",
+   "clear_cta": "yes",
+   "first_line_chars": 121,
+   "notes": "Send-to-a-friend hook, the behaviour our research ties most to non-follower reach; share prompt is framed as who it is for, not a second imperative, so the booking line stays the single CTA; keywords 'layered haircut' + Saskatoon in line 1; no question (moved to first comment)."
+  }
+ },
+ "reading": "All three pass every written rule and claims_lint (0 FAIL; only the expected WARN that Asma is not on the online roster). Decided on the 2026-11-20 evidence: DM sends per reach drive non-follower reach most, and only C is built to earn sends while keeping one CTA.",
+ "chosen": "C",
+ "claims_lint": "A/B/C 0 FAIL; WARN Asma not on 2026-10-03 roster (expected, phone booking line used)"
+}

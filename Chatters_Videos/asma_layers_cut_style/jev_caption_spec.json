@@ -1,0 +1,80 @@
+{
+ "items": [
+  {
+   "id": "A",
+   "state": {
+    "post": "Instagram Reel: after-only photos (back/side views) of medium-length brunette hair with soft feathered bouncy layers, curled-under ends and crown volume; cut and style by Asma, Chatters Lawson Heights Mall, Saskatoon. Colour unknown.",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (the booking line); a question inviting comments is allowed.",
+     "No invented prices, promotions, job titles or techniques; no colour claim (colour is unknown); no named cut technique.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more').",
+     "Booking line: chatters.ca, or call 306-931-3010 and ask for Asma (Asma is not on the online roster)."
+    ],
+    "caption": "POV: your layered haircut has bounce from every angle. Cut and style by Asma at Chatters, Lawson Heights Mall, Saskatoon.\n\nSoft feathered layers, ends curled under and volume at the crown, all at medium length.\n\nMore layers or keep it simple? Tell us below.\n\nBook with Asma: chatters.ca, or call 306-931-3010 and ask for Asma."
+   }
+  },
+  {
+   "id": "B",
+   "state": {
+    "post": "Instagram Reel: after-only photos (back/side views) of medium-length brunette hair with soft feathered bouncy layers, curled-under ends and crown volume; cut and style by Asma, Chatters Lawson Heights Mall, Saskatoon. Colour unknown.",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (the booking line); a question inviting comments is allowed.",
+     "No invented prices, promotions, job titles or techniques; no colour claim (colour is unknown); no named cut technique.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more').",
+     "Booking line: chatters.ca, or call 306-931-3010 and ask for Asma (Asma is not on the online roster)."
+    ],
+    "caption": "The back view says it all. Layered haircut and style by Asma at Chatters, Lawson Heights Mall, Saskatoon.\n\nFeathered layers, curled-under ends and lift at the crown. If medium-length hair tends to sit flat on you, layers are worth asking about.\n\nSide view or back view, which one wins? Tell us below.\n\nBook with Asma: chatters.ca, or call 306-931-3010 and ask for Asma."
+   }
+  },
+  {
+   "id": "C",
+   "state": {
+    "post": "Instagram Reel: after-only photos (back/side views) of medium-length brunette hair with soft feathered bouncy layers, curled-under ends and crown volume; cut and style by Asma, Chatters Lawson Heights Mall, Saskatoon. Colour unknown.",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (the booking line); a question inviting comments is allowed.",
+     "No invented prices, promotions, job titles or techniques; no colour claim (colour is unknown); no named cut technique.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more').",
+     "Booking line: chatters.ca, or call 306-931-3010 and ask for Asma (Asma is not on the online roster)."
+    ],
+    "caption": "For the friend who keeps saying they want layers: a layered haircut by Asma at Chatters, Lawson Heights Mall, Saskatoon.\n\nSoft, feathered and bouncy, with the ends curled under and volume at the crown. Cut and style by Asma.\n\nBook with Asma: chatters.ca, or call 306-931-3010 and ask for Asma."
+   }
+  }
+ ],
+ "questions": [
+  {
+   "id": "breaks_rule",
+   "type": "noul",
+   "question": "Does the caption break at least one of the rules as written?"
+  },
+  {
+   "id": "clear_cta",
+   "type": "noul",
+   "question": "Does the caption end with one clear action telling the reader how to book?"
+  },
+  {
+   "id": "shareable",
+   "type": "noul",
+   "question": "Would a reader be likely to send this caption's Reel to a specific friend by DM?"
+  },
+  {
+   "id": "quality",
+   "type": "score",
+   "question": "How strong is this caption for a local salon Reel?",
+   "levels": [
+    "weak: generic or confusing",
+    "ok: clear but flat",
+    "good: specific, local, natural voice",
+    "excellent: specific, local, natural and makes a reader want to book"
+   ]
+  }
+ ]
+}
