@@ -1,0 +1,83 @@
+{
+ "items": [
+  {
+   "id": "A",
+   "state": {
+    "post": "Instagram/Facebook Reel with Christmas music (Jingle Bells), back views only. BEFORE: long, dry, straight-ish golden-blonde lengths with visible darker regrowth at the part and frizzy ends. AFTER: blended, even golden/light-brown colour with soft big curls, lengths trimmed and polished. Colour, cut and style by Asma, Chatters Lawson Heights Mall, Saskatoon.",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (the booking line); a question inviting comments is allowed.",
+     "No invented prices, promotions, gift-card offers, holiday hours, job titles or techniques; no named colour technique (balayage, toner etc.) as fact; 'colour', 'blended', 'regrowth', 'curls', 'cut' are fine.",
+     "Seasonal angle allowed (holiday parties, Christmas photos) without offers or claims.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', 'wait for it', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more').",
+     "Booking line: chatters.ca, or call 306-931-3010 and ask for Asma (Asma is not on the online roster)."
+    ],
+    "caption": "Ready for Christmas photos, even from the back. Colour, cut and style by Asma at Chatters, Lawson Heights Mall, Saskatoon.\n\nBefore: dry lengths, darker regrowth at the part and frizzy ends. After: blended golden light-brown colour, trimmed lengths and soft big curls for holiday parties.\n\nBefore or after, which one gets your vote? Tell us below.\n\nBook with Asma: chatters.ca, or call 306-931-3010 and ask for Asma."
+   }
+  },
+  {
+   "id": "B",
+   "state": {
+    "post": "Instagram/Facebook Reel with Christmas music (Jingle Bells), back views only. BEFORE: long, dry, straight-ish golden-blonde lengths with visible darker regrowth at the part and frizzy ends. AFTER: blended, even golden/light-brown colour with soft big curls, lengths trimmed and polished. Colour, cut and style by Asma, Chatters Lawson Heights Mall, Saskatoon.",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (the booking line); a question inviting comments is allowed.",
+     "No invented prices, promotions, gift-card offers, holiday hours, job titles or techniques; no named colour technique (balayage, toner etc.) as fact; 'colour', 'blended', 'regrowth', 'curls', 'cut' are fine.",
+     "Seasonal angle allowed (holiday parties, Christmas photos) without offers or claims.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', 'wait for it', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more').",
+     "Booking line: chatters.ca, or call 306-931-3010 and ask for Asma (Asma is not on the online roster)."
+    ],
+    "caption": "For the friend who needs this before Christmas: colour, cut and style by Asma at Chatters, Lawson Heights Mall, Saskatoon.\n\nThe part blended in, the frizzy ends trimmed off, and soft big curls to finish. Back views, before and after.\n\nBook with Asma: chatters.ca, or call 306-931-3010 and ask for Asma."
+   }
+  },
+  {
+   "id": "C",
+   "state": {
+    "post": "Instagram/Facebook Reel with Christmas music (Jingle Bells), back views only. BEFORE: long, dry, straight-ish golden-blonde lengths with visible darker regrowth at the part and frizzy ends. AFTER: blended, even golden/light-brown colour with soft big curls, lengths trimmed and polished. Colour, cut and style by Asma, Chatters Lawson Heights Mall, Saskatoon.",
+    "rules": [
+     "Name the stylist (Asma) and the mall (Lawson Heights).",
+     "Exactly one call to action (the booking line); a question inviting comments is allowed.",
+     "No invented prices, promotions, gift-card offers, holiday hours, job titles or techniques; no named colour technique (balayage, toner etc.) as fact; 'colour', 'blended', 'regrowth', 'curls', 'cut' are fine.",
+     "Seasonal angle allowed (holiday parties, Christmas photos) without offers or claims.",
+     "No gendered words for anyone.",
+     "No 'obsessed', 'run don't walk', 'wait for it', stacked exclamation marks.",
+     "The service and Asma's name appear early (first ~125 characters show before 'more').",
+     "Booking line: chatters.ca, or call 306-931-3010 and ask for Asma (Asma is not on the online roster)."
+    ],
+    "caption": "From regrowth and frizzy ends to soft big curls. Colour, cut and style by Asma at Chatters, Lawson Heights Mall, Saskatoon.\n\nEven golden light-brown colour, polished lengths and curls with plenty of bounce. Worth keeping for your next colour appointment.\n\nRegrowth or frizz, which bugs you more? Tell us below.\n\nBook with Asma: chatters.ca, or call 306-931-3010 and ask for Asma."
+   }
+  }
+ ],
+ "questions": [
+  {
+   "id": "breaks_rule",
+   "type": "noul",
+   "question": "Does the caption break at least one of the rules as written?"
+  },
+  {
+   "id": "clear_cta",
+   "type": "noul",
+   "question": "Does the caption end with one clear action telling the reader how to book?"
+  },
+  {
+   "id": "shareable",
+   "type": "noul",
+   "question": "Would a reader be likely to send this caption's Reel to a specific friend by DM?"
+  },
+  {
+   "id": "quality",
+   "type": "score",
+   "question": "How strong is this caption for a local salon Reel?",
+   "levels": [
+    "weak: generic or confusing",
+    "ok: clear but flat",
+    "good: specific, local, natural voice",
+    "excellent: specific, local, natural and makes a reader want to book"
+   ]
+  }
+ ]
+}
