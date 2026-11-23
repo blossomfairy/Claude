@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 PIC=CHATTERS_FOLA_stylist_highlight_SILENT.mp4
 DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 $PIC)
-END_BEAT=28.52 python3 build_music_v2.py >/dev/null
+END_BEAT=32.51 python3 build_music_v2.py >/dev/null
 for o in D_pop E_lofi F_funk; do
   PRE="atrim=0:$DUR,afade=t=in:d=0.15,afade=t=out:st=$(echo "$DUR-1.4"|bc):d=1.4"
   J=$(ffmpeg -hide_banner -i music_${o}_raw.wav -af "$PRE,loudnorm=I=-14:TP=-1.3:LRA=11:print_format=json" -f null - 2>&1 | sed -n '/^{/,/^}/p')

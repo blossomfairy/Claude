@@ -16,13 +16,14 @@ import house_titles as ht  # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
 S = 1.30  # seconds per work shot (2 beats at 92 BPM)
-CTA_AT, TOTAL = 18.6, 23.1
+CTA_AT, TOTAL = 21.2, 25.7
 # (start, end, still, mode, label)   mode: "pan" = 9:16 crop from a tall still, "card" = whole frame over its blur
 SEG = [(0.0, 3.0, "portrait", "portrait", None), (3.0, 4.3, "portrait", "portrait2", None)]
 WORK = [("c1_before", "pan", "Before"), ("c1_after", "pan", "After"), ("c2_before", "pan", "Before"),
         ("c2_after", "pan", "After"), ("c3_before", "pan", "Before"), ("c3_after", "pan", "After"),
         ("c6_before", "card", "Before"), ("c6_after", "card", "After"), ("c4_before", "pan", "Before"),
-        ("c4_after", "pan", "After"), ("c5_after", "card", None)]
+        ("c4_after", "pan", "After"), ("c7_after", "pan", None), ("c7_after2", "pan", None),  # 2026-11-23 upload
+        ("c5_after", "card", None)]
 t = 4.3
 for k, m, lab in WORK:
     SEG.append((t, t + S, k, m, lab))
